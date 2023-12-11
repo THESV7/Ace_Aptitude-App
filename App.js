@@ -1,20 +1,94 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import WelcomeScreen from './Screen/WelcomeScreen'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import HomeScreen from './Screen/HomeScreen'
+import TestScreen from './Screen/TestScreen'
+import LeaderboardScreen from './Screen/LeaderboardScreen'
+import ProfileScreen from './Screen/ProfileScreen'
+import SignUpScreen from './Screen/SignUpScreen'
+import SignInScreen from './Screen/SignInScreen'
+const Stack = createNativeStackNavigator()
+const Tab = createBottomTabNavigator()
 
-export default function App() {
+import { Foundation } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+import OnboardingScreen from './Screen/OnboardingScreen'
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Welcome'>
+          <Stack.Screen name='Welcome' component={WelcomeScreen} />
+          <Stack.Screen name='Onboarding' component={OnboardingScreen} />
+          <Stack.Screen name='SignUp' component={SignUpScreen} />
+          <Stack.Screen name='SignIn' component={SignInScreen} />
+          <Stack.Screen name='Tabs' component={TabNavigator} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const TabNavigator = () => {
+  return (
+    <>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarLabelStyle: {
+            textAlign: 'center',
+            fontSize: 14,
+            marginBottom:10
+          },
+          tabBarStyle: {
+            height: 70,
+          },
+          tabBarHideOnKeyboard: true,
+          tabBarInactiveTintColor:'#C4C4C4',
+          tabBarActiveTintColor:'#6674CC',
+        }}>
+        <Tab.Screen name='Home' component={HomeScreen}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <View><Foundation name="home" size={28} color={focused ? '#6674CC' : '#C4C4C4'} /></View>
+              )
+            },
+          }} />
+        <Tab.Screen name='Test' component={TestScreen}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <View><Entypo name="new-message" size={24} color={focused ? '#6674CC' : '#C4C4C4'} /></View>
+              )
+            }
+          }} />
+        <Tab.Screen name='LeaderBoard' component={LeaderboardScreen}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <View><MaterialIcons name="leaderboard" size={28} color={focused ? '#6674CC' : '#C4C4C4'} /></View>
+              )
+            }
+          }} />
+        <Tab.Screen name='Profile' component={ProfileScreen}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <View><FontAwesome5 name="user-alt" size={24} color={focused ? '#6674CC' : '#C4C4C4'} /></View>
+              )
+            }
+          }} />
+      </Tab.Navigator>
+    </>
+  )
+}
+export default App
+
+const styles = StyleSheet.create({})
