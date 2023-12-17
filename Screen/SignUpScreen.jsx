@@ -7,10 +7,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const SignUpScreen = () => {
 
-  const [email, setEmail] = useState('Sahil799@gmail.com');
-  const [Name, setName] = useState('Sahil');
-  const [password, setPassword] = useState('Sahil799@');
-  const [confirmpassword, setComfirmpassword] = useState('Sahil779@');
+  const [email, setEmail] = useState('Sahil75@gmail.com');
+  const [Name, setName] = useState('Sami');
+  const [password, setPassword] = useState('Sahil75@');
+  const [confirmpassword, setComfirmpassword] = useState('Sahil75@');
   const [isVisible, setIsVisible] = useState(false)
   const { responseData, error, isLoading, registerUser } = useUserRegistration()
 

@@ -38,7 +38,7 @@ const SuccessfulModal = ({ visibility }) => {
                         </Animated.View>
                         <Text style={styles.modalText}>You'r Verified</Text>
                         <Text style={styles.paragraphText}>Your account is verified,let's start make friends</Text>
-                        <TouchableOpacity onPress={()=>handleRoute('Tabs')} style={[styles.NumberButton, { backgroundColor: '#6674CC' }]}><Text style={styles.buttonText}>Get started</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>handleRoute('Onboarding')} style={[styles.NumberButton, { backgroundColor: '#6674CC' }]}><Text style={styles.buttonText}>Get started</Text></TouchableOpacity>
                     </View>
                 </View>
             </Modal>

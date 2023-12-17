@@ -18,7 +18,7 @@ const Header = () => {
     },[handleUserAuthinticate])
     return (
         <>
-            <View style={{ flex: 1, flexDirection: 'row',paddingBottom:10 , alignItems: 'center' }}>
+            <View style={{ flex: 1, flexDirection: 'row',paddingBottom:10 , alignItems: 'center' ,paddingHorizontal: 20}}>
                 <View style={{ flex: 1 }}>
                     <Image source={Profile} style={{ width: 50, height: 50, borderRadius: 100 }} />
                 </View>

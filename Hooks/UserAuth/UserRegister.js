@@ -7,12 +7,12 @@ const useUserRegistration = () => {
 
     const registerUser = async (Name, email, password, confirmpassword) => {
         setIsLoading(true);
-        // if (password !== confirmpassword) {
-        //     return { responseData, error, isLoading, registerUser }
-        // }
+        if (password !== confirmpassword) {
+            return { responseData, error, isLoading, registerUser }
+        }
         try {
             // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint for user registration
-            const response = await fetch('http://192.168.0.103:5000/api/signup', {
+            const response = await fetch('https://ace-aptitude.onrender.com/api/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -2,11 +2,16 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { Entypo } from '@expo/vector-icons';
-const BackButton = ({route}) => {
+const BackButton = ({route,OnClose}) => {
 
     const navigation = useNavigation()
     const handleRoute=()=>{
-        navigation.goBack()
+        if(OnClose){
+            OnClose(false)
+        }
+        else{
+            navigation.goBack()
+        }
     }
     return (
         <>
@@ -21,14 +26,14 @@ export default BackButton
 
 const BackButtonStyle = StyleSheet.create({
     BackButtonIcon:{
-        marginLeft:20,
-        marginTop:20,
+        // marginLeft:20,
+        // marginTop:20,
         width:50,
         height:50,
         display:'flex',
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#F6F7FA',
+        backgroundColor:'#e9e9ff',
         borderRadius:10
     }
 })

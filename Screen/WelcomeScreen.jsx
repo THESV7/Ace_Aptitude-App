@@ -5,6 +5,7 @@ import Logo from '../assets/NavLogo.png'
 import { StatusBar } from 'expo-status-bar'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
 const WelcomeScreen = () => {
     const navigate = useNavigation()
 
@@ -12,18 +13,25 @@ const WelcomeScreen = () => {
         const isVerified = await AsyncStorage.getItem('user')
         return isVerified
     }
+
     useEffect(() => {
-        if (handleUserAuthinticate) {
-            setTimeout(() => {
-                navigate.navigate('Tabs')
-            }, 3000)
-        }
-        else {
-            setTimeout(() => {
-                navigate.navigate('SignUp')
-            }, 3000)
-        }
-    }, [navigate])
+        const checkUserAuthentication = async () => {
+            const isVerified = await handleUserAuthinticate(); // Call the function
+            if (isVerified) {
+                setTimeout(() => {
+                    navigate.navigate('Tabs');
+                }, 3000);
+            } else {
+                setTimeout(() => {
+                    navigate.navigate('SignUp');
+                }, 3000);
+            }
+        };
+        
+        checkUserAuthentication(); // Invoke the function
+
+    }, [navigate]);
+
     return (
         <SafeAreaView style={welcomeStyles.container}>
             <StatusBar style='auto' />
