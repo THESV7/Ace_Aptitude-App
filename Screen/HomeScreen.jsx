@@ -8,34 +8,34 @@ import CategorySelection from '../ScreenSection/CategorySection';
 import RecommandedSection from '../ScreenSection/RecommandedSection';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-// import { useFocusEffect, useIsFocused, useRoute } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused, useRoute } from '@react-navigation/native';
 
 const HomeScreen = () => {
     
     const navigation = useNavigation()
-    // const [lastBackPressed, setLastBackPressed] = useState(0);
+    const [lastBackPressed, setLastBackPressed] = useState(0);
 
-    // const handleBackPress = () => {
-    //     const currentTime = new Date().getTime();
+    const handleBackPress = () => {
+        const currentTime = new Date().getTime();
 
-    //     if (currentTime - lastBackPressed < 2000) {
-    //         BackHandler.exitApp();
-    //         return true;
-    //     }
+        if (currentTime - lastBackPressed < 2000) {
+            BackHandler.exitApp();
+            return true;
+        }
 
-    //     ToastAndroid.show('Press back again to exit', ToastAndroid.SHORT);
-    //     setLastBackPressed(currentTime);
+        ToastAndroid.show('Press back again to exit', ToastAndroid.SHORT);
+        setLastBackPressed(currentTime);
 
-    //     return true;
-    // };
+        return true;
+    };
 
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+    useFocusEffect(
+        React.useCallback(() => {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
 
-    //         return () => backHandler.remove();
-    //     }, [lastBackPressed]) // Update effect when lastBackPressed changes
-    // );
+            return () => backHandler.remove();
+        }, [lastBackPressed]) // Update effect when lastBackPressed changes
+    );
 
     const clearAsyncStorage = async () => {
         try {

@@ -6,12 +6,13 @@ import usePracticeTestDetails from '../Hooks/TestDetails/PracticeTestDetails';
 import { useEffect, useState } from 'react';
 import ModalFilter from '../Components/ModalFilter';
 import SkeletonTestCard from '../Components/SkeletonComponents/SkeletonTestCard';
-
+import useCheckTheme from '../Hooks/Theme/checkSystemTheme'
 const PracticeSection = () => {
     const [filterToggle, setFilterToggle] = useState(false);
     const [isDataFetched, setIsDataFetched] = useState(false); // State to track data fetching
     const { responseData, error, isLoading, getPracticeTestDetails } = usePracticeTestDetails();
 
+    const {CurrentTheme } = useCheckTheme()
     useEffect(() => {
         if (!isDataFetched) {
             const fetchTestDetails = async () => {
@@ -26,6 +27,7 @@ const PracticeSection = () => {
     const handleFilterToggle = () => {
         setFilterToggle(!filterToggle)
     }
+
     return (
         <>
             <View style={styles.PracticeContainer}>

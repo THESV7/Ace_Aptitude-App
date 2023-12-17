@@ -12,7 +12,7 @@ const SkeletonTestCard = ({ count }) => {
           duration: 1000,
           useNativeDriver: true,
           isInteraction: false,
-          delay: index * 200, // Add a delay to stagger the animation
+          delay: 200, // Add a delay to stagger the animation
         })
       );
 

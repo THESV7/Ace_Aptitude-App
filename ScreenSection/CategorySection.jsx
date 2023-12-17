@@ -1,13 +1,15 @@
-import {StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import General from '../assets/General.png'
 import Programing from '../assets/Programming.png'
 import Verbal from '../assets/Verbal.png'
 import Logical_Reasoning from '../assets/Logical.png'
 import CategoryButton from '../Components/CategoryButton'
+import useCustomNavigation from '../Hooks/Navigation/Navigate'
 
 const CategorySeletion = () => {
 
+    const { navigate } = useCustomNavigation()
     const Category = [
         {
             category: 'General',
@@ -31,13 +33,13 @@ const CategorySeletion = () => {
         },
     ]
     return (
-        <View style={{paddingTop:20, paddingVertical: 10 ,flex:1,marginHorizontal: 20}}>
-            <View style={{flex:1,justifyContent:'space-between',flexDirection:'row'}}>
+        <View style={{ paddingTop: 20, paddingVertical: 10, flex: 1, marginHorizontal: 20 }}>
+            <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row' }}>
                 <Text style={{ fontSize: 18, fontWeight: '700' }}>Categories</Text>
-                <Text style={{ fontSize: 14, fontWeight: '700' ,color:'#6674CC' }}>View all</Text>
+                <Text style={{ fontSize: 14, fontWeight: '700', color: '#6674CC' }} onPress={() =>navigate('Test')}>View all</Text>
             </View>
             <View>
-                <View style={{flex:1,justifyContent:'center',alignItems:'center',flexDirection:'row'}}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
                     {
                         Category.map((category, index) => (
                             <CategoryButton category={category} key={index} />
