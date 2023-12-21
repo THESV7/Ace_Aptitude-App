@@ -24,9 +24,19 @@ const usePracticeTestDetails = () => {
             setError(error);
             setIsLoading(false);
         }
+        finally {
+            setIsLoading(false);
+        }
     }
 
-    return { responseData, error, isLoading, getPracticeTestDetails }
+
+    const clearData = () => {
+        setResponseData(null);
+        setIsLoading(false);
+        setError(null);
+    };
+
+    return { responseData, error, isLoading, getPracticeTestDetails ,clearData}
 }
 
 export default usePracticeTestDetails;

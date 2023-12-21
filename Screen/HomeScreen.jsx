@@ -40,7 +40,7 @@ const HomeScreen = () => {
     const clearAsyncStorage = async () => {
         try {
           await AsyncStorage.clear();
-          navigation.navigate('WelcomeScreen')
+          navigation.navigate('SignUp')
           console.log('AsyncStorage cleared successfully.');
         } catch (error) {
           console.error('Error clearing AsyncStorage:', error);

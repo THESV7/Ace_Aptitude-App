@@ -11,16 +11,17 @@ const SignUpScreen = () => {
   const [Name, setName] = useState('Sami');
   const [password, setPassword] = useState('Sahil75@');
   const [confirmpassword, setComfirmpassword] = useState('Sahil75@');
+  const [profileImage, setProfileImage] = useState('https://res.cloudinary.com/dmrjruik5/image/upload/v1702987210/x8a67paocyiausbp4fkm.png')
   const [isVisible, setIsVisible] = useState(false)
   const { responseData, error, isLoading, registerUser } = useUserRegistration()
 
 
-  const handleStoreData = async()=>{
+  const handleStoreData = async () => {
     try {
-      await AsyncStorage.setItem('user' , JSON.stringify(responseData.user))
+      await AsyncStorage.setItem('user', JSON.stringify(responseData.user))
       console.log('Successfully saved')
     } catch (error) {
-      console.log("Error" ,error)
+      console.log("Error", error)
     }
   }
   useEffect(() => {
@@ -28,10 +29,10 @@ const SignUpScreen = () => {
       handleStoreData()
       setIsVisible(true);
     }
-  }, [responseData,isLoading]);
+  }, [responseData, isLoading]);
 
   const handleRegister = () => {
-    registerUser(Name, email, password, confirmpassword)
+    registerUser(Name, email, password, confirmpassword, profileImage)
   }
   return (
     <SafeAreaView style={{ padding: 20, flex: 1, backgroundColor: 'white', justifyContent: 'center' }}>

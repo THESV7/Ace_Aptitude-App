@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
 
 const SkeletonTestCard = ({ count }) => {
   const animatedValues = React.useRef([...Array(count)].map(() => new Animated.Value(0)));
 
-  React.useEffect(() => {
+  useEffect(() => {
     animatedValues.current.forEach((value, index) => {
       const animation = Animated.loop(
         Animated.timing(value, {

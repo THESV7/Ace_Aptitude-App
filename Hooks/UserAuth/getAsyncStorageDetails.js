@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-const useUserDetails =()=>{
+const usegetAsyncStorage =()=>{
     const handleUserAuthinticate = async () => {
         const details = await AsyncStorage.getItem('user')
         const isVerified = JSON.parse(details)
@@ -10,4 +10,4 @@ const useUserDetails =()=>{
     return { handleUserAuthinticate }
 }
 
-export default useUserDetails;
+export default usegetAsyncStorage;
