@@ -162,6 +162,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderWidth: 5,
     borderColor: '#f7f8fa',
+    backgroundColor:'#E0E0E0'
   },
   editIcon: {
     position: 'absolute',
