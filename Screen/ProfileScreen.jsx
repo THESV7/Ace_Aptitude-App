@@ -9,6 +9,7 @@ import usegetAsyncStorage from '../Hooks/UserAuth/getAsyncStorageDetails';
 import { useFocusEffect } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker'; // Import ImagePicker
 import useUserProfileUpdate from '../Hooks/UserAuth/userProfileUpdate';
+import UserTestCountSection from '../ScreenSection/ProfileSections/components/UserTestCountSection';
 
 const ProfileScreen = () => {
   const [userDetails, setUserDetails] = useState([]);
@@ -105,7 +106,7 @@ const ProfileScreen = () => {
                 </View>
               </View>
               <View style={{ flex: 1 }}>
-                <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+                <View style={{flex:0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
                   <View>
                     <Text style={styles.name}>{userDetails?.Name || 'Guest'}</Text>
                     <Text style={styles.email}>{userDetails.email || 'Guest@gmail.com'}</Text>
@@ -115,6 +116,9 @@ const ProfileScreen = () => {
                       <Text style={styles.editText}>Edit Profile</Text>
                     </TouchableOpacity>
                   )}
+                </View>
+                <View>
+                    <UserTestCountSection/>
                 </View>
               </View>
             </View>
