@@ -1,6 +1,7 @@
 import { useState } from "react";
 import usegetAsyncStorage from "./getAsyncStorageDetails";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import useDeleteProfile from "./deleteProfile";
 
 
 const useUserProfileUpdate = () => {
@@ -8,7 +9,7 @@ const useUserProfileUpdate = () => {
     const [responseData, setResponseData] = useState(null);
     const [error, setError] = useState(null);
     const { handleUserAuthinticate } = usegetAsyncStorage();
-
+    const {deleteProfile}=useDeleteProfile()
     const uploadImage = async (fileUrl) => {
         try {
             setIsLoading(true);
@@ -28,9 +29,13 @@ const useUserProfileUpdate = () => {
                 const data = await response.json();
                 setResponseData(data);
                 const userDetails = await handleUserAuthinticate()
+                const perviousProfileImage = userDetails.profileImage
                 userDetails.profileImage = data.data;
                 await AsyncStorage.setItem('user', JSON.stringify(userDetails));
-                console.log(userDetails)
+                const parts = perviousProfileImage.split('/');
+                const publicIdWithExtension = parts[parts.length - 1]; 
+                const publicId = publicIdWithExtension.split('.')[0];
+                await deleteProfile(publicId)
                 setIsLoading(false)
             }
         } catch (error) {
