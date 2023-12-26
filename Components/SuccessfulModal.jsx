@@ -4,7 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 
-const SuccessfulModal = ({ visibility }) => {
+const SuccessfulModal = ({ visibility ,onClose}) => {
 
     const navigation = useNavigation()
     const circlePadding = useSharedValue(0)
@@ -26,11 +26,12 @@ const SuccessfulModal = ({ visibility }) => {
       }, [visibility]);
     
     const handleRoute=(route)=>{
+        onClose()
         navigation.navigate(route)
     }
     return (
         <>
-            <Modal transparent={true} visible={visibility}>
+            <Modal transparent={true} visible={visibility} statusBarTranslucent={true}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <Animated.View style={{  padding: circlePadding, backgroundColor: '#e9e9ff', borderRadius: 100 }}>

@@ -4,18 +4,19 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import useUserRegistration from '../Hooks/UserAuth/UserRegister'
 import SuccessfulModal from '../Components/SuccessfulModal'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import useCustomNavigation from '../Hooks/Navigation/Navigate'
 
 const SignUpScreen = () => {
 
-  const [email, setEmail] = useState('Sahil75@gmail.com');
-  const [Name, setName] = useState('Sami');
-  const [password, setPassword] = useState('Sahil75@');
-  const [confirmpassword, setComfirmpassword] = useState('Sahil75@');
+  const [email, setEmail] = useState('');
+  const [Name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmpassword, setComfirmpassword] = useState('');
   const [profileImage, setProfileImage] = useState('https://res.cloudinary.com/dmrjruik5/image/upload/v1702987210/x8a67paocyiausbp4fkm.png')
   const [isVisible, setIsVisible] = useState(false)
   const { responseData, error, isLoading, registerUser } = useUserRegistration()
 
-
+  const {navigate}=useCustomNavigation()
   const handleStoreData = async () => {
     try {
       await AsyncStorage.setItem('user', JSON.stringify(responseData.user))
@@ -32,7 +33,11 @@ const SignUpScreen = () => {
   }, [responseData, isLoading]);
 
   const handleRegister = () => {
-    registerUser(Name, email, password, confirmpassword, profileImage)
+    const name = Name.toLowerCase()
+    const Email = email.toLowerCase()
+    const Password = password.toLowerCase()
+    const ConfirmPassword = confirmpassword.toLowerCase()
+    registerUser(name, Email, Password, ConfirmPassword, profileImage)
   }
   return (
     <SafeAreaView style={{ padding: 20, flex: 1, backgroundColor: 'white', justifyContent: 'center' }}>
@@ -60,21 +65,23 @@ const SignUpScreen = () => {
               placeholder='Password'
               onChangeText={setPassword}
               value={password}
+              secureTextEntry={true}
             />
             <TextInput
               style={{ elevation: 1, paddingHorizontal: 15, paddingVertical: 15, backgroundColor: '#e9e9ff', borderRadius: 15, fontSize: 16, fontWeight: '700' }}
               placeholder='Confirm Password'
               onChangeText={setComfirmpassword}
               value={confirmpassword}
+              secureTextEntry={true}
             />
             <TouchableOpacity style={{ backgroundColor: '#6674CC', padding: 15, borderRadius: 15, alignItems: 'center' }}
               onPress={handleRegister}>
               <Text style={{ color: 'white', fontWeight: '700', fontSize: 16 }}>Register</Text>
             </TouchableOpacity>
-            <Text style={styles.paragraphText}>Have an account? <Text style={{ color: '#6674CC' }}>Sign In</Text></Text>
+            <Text style={styles.paragraphText}>Have an account? <Text onPress={()=> navigate('SignIn')} style={{ color: '#6674CC' }}>Sign In</Text></Text>
           </View>
         </View>
-        <SuccessfulModal visibility={isVisible} />
+        <SuccessfulModal visibility={isVisible} onClose={()=>setIsVisible(false)}/>
       </View>
     </SafeAreaView>
   )

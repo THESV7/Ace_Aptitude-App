@@ -14,8 +14,8 @@ const useUserDetails = () => {
                 throw new Error('User already registered');
             }
             const data = await response.json();
-            const sortedData = data.sort((a, b) => b.totalcoins - a.totalcoins);
-            setResponseData(sortedData);
+            setResponseData(data)
+            setIsLoading(false)
         } catch (error) {
             setError(error);
         } finally {
@@ -29,7 +29,7 @@ const useUserDetails = () => {
         setError(null);
     };
 
-    return { responseData, error, isLoading, getUserDetails, clearData };
+    return { data:responseData, error, isUserLoading:isLoading, getUserDetails, clear:clearData };
 };
 
 export default useUserDetails;

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar, setStatusBarBackgroundColor } from 'expo-status-bar';
 import BackButton from '../Components/BackButton';
 import { Ionicons, Entypo } from '@expo/vector-icons'; // Import Entypo icon
 import { LinearGradient } from 'expo-linear-gradient';
@@ -9,12 +9,16 @@ import usegetAsyncStorage from '../Hooks/UserAuth/getAsyncStorageDetails';
 import { useFocusEffect } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker'; // Import ImagePicker
 import useUserProfileUpdate from '../Hooks/UserAuth/userProfileUpdate';
-import UserTestCountSection from '../ScreenSection/ProfileSections/components/UserTestCountSection';
+import StatsSection from '../ScreenSection/ProfileSections/components/StatsSection';
+import BadgeSection from '../ScreenSection/ProfileSections/BadgeSection';
+import useCustomNavigation from '../Hooks/Navigation/Navigate';
+
 
 const ProfileScreen = () => {
   const [userDetails, setUserDetails] = useState([]);
   const { handleUserAuthinticate } = usegetAsyncStorage();
   const { responseData, error, isLoading, uploadImage, clearData } = useUserProfileUpdate();
+  const {navigate} = useCustomNavigation()
   useFocusEffect(
     useCallback(() => {
       const getDetails = async () => {
@@ -22,75 +26,76 @@ const ProfileScreen = () => {
         setUserDetails(userDetails);
       };
       getDetails();
-    }, [isLoading])
+    }, [])
   );
 
+    
+  // const handleImageUpload = async () => {
+  //   try {
+  //     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+  //     if (permissionResult.granted === false) {
+  //       console.log('Permission to access camera roll is required!');
+  //       return;
+  //     }
 
-  const handleImageUpload = async () => {
-    try {
-      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (permissionResult.granted === false) {
-        console.log('Permission to access camera roll is required!');
-        return;
-      }
+  //     const pickerResult = await ImagePicker.launchImageLibraryAsync({
+  //       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  //       quality: 1,
+  //       allowsEditing: true, // Enables built-in cropping UI (if available)
+  //       aspect: [1, 1], // Aspect ratio for cropping
+  //       accept: 'image/*', // Limit file types to images
+  //     });
 
-      const pickerResult = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        quality: 1,
-        allowsEditing: true, // Enables built-in cropping UI (if available)
-        aspect: [1, 1], // Aspect ratio for cropping
-        accept: 'image/*', // Limit file types to images
-      });
+  //     if (!pickerResult.canceled) {
+  //       const formData = new FormData();
+  //       formData.append('file', {
+  //         uri: pickerResult.assets[0].uri,
+  //         type: 'image/jpeg', // Adjust the type based on your image format
+  //         name: 'upload.jpg', // Adjust the file name if needed
+  //       });
+  //       formData.append('upload_preset', 'Profile_Image_upload'); // Replace with your Cloudinary upload preset
 
-      if (!pickerResult.canceled) {
-        const formData = new FormData();
-        formData.append('file', {
-          uri: pickerResult.assets[0].uri,
-          type: 'image/jpeg', // Adjust the type based on your image format
-          name: 'upload.jpg', // Adjust the file name if needed
-        });
-        formData.append('upload_preset', 'Profile_Image_upload'); // Replace with your Cloudinary upload preset
+  //       const apiKey = '537622161437147'
+  //       const apiSecret = 'pYnAsthvi-kY5FpXWzO3PTnNl-A'
+  //       // Make an API call to Cloudinary to upload the image
+  //       const response = await fetch(`https://api.cloudinary.com/v1_1/dmrjruik5/image/upload`, {
+  //         method: 'POST',
+  //         body: formData,
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //         },
+  //         auth: {
+  //           username: apiKey,
+  //           password: apiSecret,
+  //         },
+  //       });
 
-        const apiKey = '537622161437147'
-        const apiSecret = 'pYnAsthvi-kY5FpXWzO3PTnNl-A'
-        // Make an API call to Cloudinary to upload the image
-        const response = await fetch(`https://api.cloudinary.com/v1_1/dmrjruik5/image/upload`, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          auth: {
-            username: apiKey,
-            password: apiSecret,
-          },
-        });
+  //       if (response.ok) {
+  //         const cloudinaryResponse = await response.json();
+  //         await uploadImage(cloudinaryResponse.secure_url)
+  //       } else {
+  //         console.error('Failed to upload to Cloudinary:', response);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error('Error uploading:', error);
+  //   }
+  // };
 
-        if (response.ok) {
-          const cloudinaryResponse = await response.json();
-          await uploadImage(cloudinaryResponse.secure_url)
-        } else {
-          console.error('Failed to upload to Cloudinary:', response);
-        }
-      }
-    } catch (error) {
-      console.error('Error uploading:', error);
-    }
-  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar style='auto' />
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <StatusBar style="auto" />
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} overScrollMode="never">
         <View style={styles.container}>
-          <LinearGradient colors={['#6674cc', '#f7f8fa']} locations={[0.25, 0.25]} style={styles.gradient}>
+          <LinearGradient colors={['#6674cc', '#f7f8fa']} locations={[0.20, 0.20]} style={styles.gradient}>
             <View style={styles.content}>
               <View style={[styles.header, { flex: 0 }]}>
                 <View style={styles.headerContent}>
                   <View style={{ flex: 1 }}>
-                    <BackButton />
+                    {/* <BackButton /> */}
                   </View>
-                  <TouchableOpacity style={styles.settingsButton}>
+                  <TouchableOpacity style={styles.settingsButton} onPress={()=> navigate('Settings')}>
                     <Ionicons name="md-settings-outline" size={30} color="#6674CC" />
                   </TouchableOpacity>
                 </View>
@@ -100,25 +105,28 @@ const ProfileScreen = () => {
                     style={styles.image}
                   />
                   {/* Add Expo edit icon */}
-                  <TouchableOpacity style={styles.editIcon} onPress={handleImageUpload}>
+                  {/* <TouchableOpacity style={styles.editIcon} onPress={handleImageUpload}>
                     <Entypo name="edit" size={18} color="black" />
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                 </View>
               </View>
               <View style={{ flex: 1 }}>
-                <View style={{flex:0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+                <View style={{ flex: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
                   <View>
                     <Text style={styles.name}>{userDetails?.Name || 'Guest'}</Text>
                     <Text style={styles.email}>{userDetails.email || 'Guest@gmail.com'}</Text>
                   </View>
                   {userDetails && (
-                    <TouchableOpacity style={styles.editButton}>
+                    <TouchableOpacity style={styles.editButton} onPress={()=> navigate('Edit Profile')}>
                       <Text style={styles.editText}>Edit Profile</Text>
                     </TouchableOpacity>
                   )}
                 </View>
                 <View>
-                    <UserTestCountSection/>
+                  <StatsSection />
+                </View>
+                <View>
+                  <BadgeSection />
                 </View>
               </View>
             </View>
@@ -166,7 +174,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderWidth: 5,
     borderColor: '#f7f8fa',
-    backgroundColor:'#E0E0E0'
+    backgroundColor: '#E0E0E0'
   },
   editIcon: {
     position: 'absolute',
@@ -180,6 +188,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '700',
     textAlign: 'center',
+    textTransform:'capitalize'
   },
   email: {
     fontSize: 16,

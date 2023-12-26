@@ -23,7 +23,7 @@ const WelcomeScreen = () => {
                 }, 3000);
             } else {
                 setTimeout(() => {
-                    navigate.navigate('SignUp');
+                    navigate.navigate('SignIn');
                 }, 3000);
             }
         };

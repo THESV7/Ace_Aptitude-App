@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import StatsCard from './StatsCard';
 
-const UserTestCountSection = () => {
+const StatsSection = () => {
 
   const cardData = [
     {
@@ -46,7 +46,7 @@ const UserTestCountSection = () => {
   )
 }
 
-export default UserTestCountSection
+export default StatsSection
 
 const styles = StyleSheet.create({
   

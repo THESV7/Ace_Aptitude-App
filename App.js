@@ -18,7 +18,10 @@ import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import OnboardingScreen from './Screen/OnboardingScreen'
-
+import DashBoardScreen from './Screen/DashBoardScreen'
+import SettingsScreen from './Screen/SettingsScreen'
+import EditProfileScreen from './Screen/EditProfileScreen'
+import NotificationScreen from './Screen/NotificationScreen'
 const App = () => {
   return (
     <>
@@ -29,6 +32,10 @@ const App = () => {
           <Stack.Screen name='SignUp' component={SignUpScreen} />
           <Stack.Screen name='SignIn' component={SignInScreen} />
           <Stack.Screen name='Tabs' component={TabNavigator} />
+          <Stack.Screen name='Dashboard' component={DashBoardScreen} />
+          <Stack.Screen name='Settings' component={SettingsScreen} />
+          <Stack.Screen name='Edit Profile' component={EditProfileScreen} />
+          <Stack.Screen name='Notifications' component={NotificationScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
