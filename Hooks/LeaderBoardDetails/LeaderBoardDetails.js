@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { BASE_URL } from '@env';
 const useLeaderBoardDetails = () => {
     const [responseData, setResponseData] = useState(null);
     const [error, setError] = useState(null);
@@ -8,7 +8,7 @@ const useLeaderBoardDetails = () => {
     const getLeaderBoardDetails = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch('http://192.168.0.103:5000/api/leaderboard');
+            const response = await fetch(`${BASE_URL}/leaderboard`);
 
             if (!response.ok) {
                 throw new Error('User already registered');

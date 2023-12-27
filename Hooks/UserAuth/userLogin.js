@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-
+import { BASE_URL } from '@env';
 const useUserLogin = () => {
     const [responseData, setResponseData] = useState(null);
     const [error, setError] = useState(null);
@@ -9,7 +9,7 @@ const useUserLogin = () => {
     const userLogin = async (email,password) => {
         setIsLoading(true)
         try {
-            const response = await fetch('http://192.168.0.103:5000/api/login', {
+            const response = await fetch(`${BASE_URL}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

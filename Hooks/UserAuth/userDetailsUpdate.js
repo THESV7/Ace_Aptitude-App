@@ -1,6 +1,6 @@
 import { useState } from "react";
 import usegetAsyncStorage from "./getAsyncStorageDetails";
-
+import { BASE_URL } from '@env';
 const useUpdateUserDetails = ()=>{
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +12,7 @@ const useUpdateUserDetails = ()=>{
         const data = {Name , email , id}
         try {
             // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint for user registration
-            const response = await fetch('http://192.168.0.103:5000/api/editProfile', {
+            const response = await fetch(`${BASE_URL}/editProfile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

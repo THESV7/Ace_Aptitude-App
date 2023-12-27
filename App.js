@@ -22,6 +22,8 @@ import DashBoardScreen from './Screen/DashBoardScreen'
 import SettingsScreen from './Screen/SettingsScreen'
 import EditProfileScreen from './Screen/EditProfileScreen'
 import NotificationScreen from './Screen/NotificationScreen'
+import PrivacyScreen from './Screen/PrivacyPolicyScreen'
+import ReportProblemScreen from './Screen/ReportProblemScreen'
 const App = () => {
   return (
     <>
@@ -36,6 +38,8 @@ const App = () => {
           <Stack.Screen name='Settings' component={SettingsScreen} />
           <Stack.Screen name='Edit Profile' component={EditProfileScreen} />
           <Stack.Screen name='Notifications' component={NotificationScreen} />
+          <Stack.Screen name='Privacy Policy' component={PrivacyScreen} />
+          <Stack.Screen name='Report' component={ReportProblemScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

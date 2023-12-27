@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons'; // Import necessary icons from Expo
 import { Feather } from '@expo/vector-icons';
-import BackButton from '../Components/BackButton';
 import useLogOut from '../Hooks/UserAuth/userLogOut';
 import useCustomNavigation from '../Hooks/Navigation/Navigate';
 import CustomHeader from '../Components/CustomeHeader/CustomHeader';
+import ConfirmModal from '../Components/ConfirmModal';
 
 const SettingsScreen = () => {
 
   const {navigate}=useCustomNavigation()
   const {logout} = useLogOut()
+  const [isVisible, setIsVisible] = useState(false)
+
+  const handleVisiblity = ()=>{
+    setIsVisible(true)
+  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
@@ -31,9 +35,9 @@ const SettingsScreen = () => {
             <Feather name="bell" size={24} color="black" />
               <Text style={styles.iconText}>Notifications</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.optionContainer}>
+            <TouchableOpacity style={styles.optionContainer} onPress={()=>navigate('Privacy Policy')}>
             <Feather name="lock" size={24} color="black" />
-              <Text style={styles.iconText}>Privacy</Text>
+              <Text style={styles.iconText}>Privacy Policy</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -42,7 +46,7 @@ const SettingsScreen = () => {
         <View style={{ paddingHorizontal: 30 }}>
           <Text style={{ fontSize: 20, fontWeight: '700', marginTop: 20 }}>Cache</Text>
           <View style={{ paddingLeft: 10 }}>
-            <TouchableOpacity style={styles.optionContainer}>
+            <TouchableOpacity style={styles.optionContainer} onPress={handleVisiblity}>
               <Feather name="trash" size={24} color="black" />
               <Text style={styles.iconText}>Clear Cache</Text>
             </TouchableOpacity>
@@ -53,7 +57,7 @@ const SettingsScreen = () => {
         <View style={{ paddingHorizontal: 30 }}>
           <Text style={{ fontSize: 20, fontWeight: '700', marginTop: 20 }}>Actions</Text>
           <View style={{ paddingLeft: 10 }}>
-            <TouchableOpacity style={styles.optionContainer}>
+            <TouchableOpacity style={styles.optionContainer} onPress={()=>navigate('Report')}>
               <Feather name="alert-triangle" size={24} color="black" />
               <Text style={styles.iconText}>Report a Problem</Text>
             </TouchableOpacity>
@@ -64,6 +68,8 @@ const SettingsScreen = () => {
           </View>
         </View>
       </View>
+
+      <ConfirmModal visibility={isVisible} onClose={()=>setIsVisible(false)}/>
     </SafeAreaView>
   );
 };
