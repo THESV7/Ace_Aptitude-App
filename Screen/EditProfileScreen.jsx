@@ -17,7 +17,6 @@ import { CLOUD_NAME, API_KEY, API_SECRET } from '@env';
 const EditProfileScreen = () => {
 
     const [userDetails, setUserDetails] = useState([]);
-    const [email, setEmail] = useState('');
     const [Name, setName] = useState('');
     const { handleUserAuthinticate } = usegetAsyncStorage();
     const { responseData, error, isLoading, uploadImage, clearData } = useUserProfileUpdate();
@@ -98,7 +97,8 @@ const EditProfileScreen = () => {
     };
 
     const handleUpdateProfile = () => {
-        userDetailsUpdate(Name, email)
+        const name = Name.toLowerCase()
+        userDetailsUpdate(name)
     }
 
     return (
@@ -126,17 +126,8 @@ const EditProfileScreen = () => {
                                 {/* Input for Name */}
                                 <TextInput
                                     style={styles.inputField}
-                                    value={Name}
+                                    value={Name || userDetails.Name}
                                     onChangeText={setName}
-                                />
-                            </View>
-                            <View style={{ marginTop: 20 }}>
-                                <Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 5 }}>Email</Text>
-                                {/* Input for Email */}
-                                <TextInput
-                                    style={styles.inputField}
-                                    value={email}
-                                    onChangeText={setEmail}
                                 />
                             </View>
                             {/* Save button */}
@@ -225,6 +216,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 8,
         fontSize: 16,
+        textTransform:'capitalize'
     },
 
     saveButton: {

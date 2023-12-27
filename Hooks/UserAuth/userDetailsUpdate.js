@@ -1,15 +1,16 @@
 import { useState } from "react";
 import usegetAsyncStorage from "./getAsyncStorageDetails";
 import { BASE_URL } from '@env';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const useUpdateUserDetails = ()=>{
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const { handleUserAuthinticate } = usegetAsyncStorage();
-    const userDetailsUpdate = async(Name,email)=>{
+    const userDetailsUpdate = async(Name)=>{
         setIsLoading(true)
         const userDetails = await handleUserAuthinticate();
         const id = userDetails._id;
-        const data = {Name , email , id}
+        const data = {Name , id}
         try {
             // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint for user registration
             const response = await fetch(`${BASE_URL}/editProfile`, {
@@ -27,9 +28,7 @@ const useUpdateUserDetails = ()=>{
                 const data = await response.json();
                 const userDetails = await handleUserAuthinticate()
                 userDetails.Name = data.Name
-                userDetails.email = data.email
                 await AsyncStorage.setItem('user', JSON.stringify(userDetails));
-                console.log(userDetails)
                 setIsLoading(false)
             }
         } catch (error) {
