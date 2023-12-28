@@ -12,24 +12,28 @@ import useUserProfileUpdate from '../Hooks/UserAuth/userProfileUpdate';
 import StatsSection from '../ScreenSection/ProfileSections/components/StatsSection';
 import BadgeSection from '../ScreenSection/ProfileSections/BadgeSection';
 import useCustomNavigation from '../Hooks/Navigation/Navigate';
+import useUserDetails from '../Hooks/UserAuth/userDetials';
+import TextSkeleton from '../Components/SkeletonComponents/TextSkeleton';
+import ImageSkeleton from '../Components/SkeletonComponents/ImageSkeleton';
 
 
 const ProfileScreen = () => {
   const [userDetails, setUserDetails] = useState([]);
   const { handleUserAuthinticate } = usegetAsyncStorage();
   const { responseData, error, isLoading, uploadImage, clearData } = useUserProfileUpdate();
-  const {navigate} = useCustomNavigation()
+  const { data: userDetailsData, isUserLoading, getUserDetails, clear } = useUserDetails(); // Use the hook
+  const { navigate } = useCustomNavigation()
   useFocusEffect(
     useCallback(() => {
       const getDetails = async () => {
         const userDetails = await handleUserAuthinticate();
-        setUserDetails(userDetails);
+        getUserDetails(userDetails._id); // Fetch user details using the hook
       };
       getDetails();
     }, [])
   );
 
-    
+
   // const handleImageUpload = async () => {
   //   try {
   //     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -95,15 +99,20 @@ const ProfileScreen = () => {
                   <View style={{ flex: 1 }}>
                     {/* <BackButton /> */}
                   </View>
-                  <TouchableOpacity style={styles.settingsButton} onPress={()=> navigate('Settings')}>
+                  <TouchableOpacity style={styles.settingsButton} onPress={() => navigate('Settings')}>
                     <Ionicons name="md-settings-outline" size={30} color="#6674CC" />
                   </TouchableOpacity>
                 </View>
                 <View>
-                  <Image
-                    source={{ uri: userDetails.profileImage }} // Replace with your image source
-                    style={styles.image}
-                  />
+                  {
+                    isUserLoading  ?
+                    <ImageSkeleton/>
+                      :
+                      <Image
+                        source={{ uri: userDetailsData?.profileImage }} // Replace with your image source
+                        style={styles.image}
+                      />
+                  }
                   {/* Add Expo edit icon */}
                   {/* <TouchableOpacity style={styles.editIcon} onPress={handleImageUpload}>
                     <Entypo name="edit" size={18} color="black" />
@@ -113,14 +122,27 @@ const ProfileScreen = () => {
               <View style={{ flex: 1 }}>
                 <View style={{ flex: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
                   <View>
-                    <Text style={styles.name}>{userDetails?.Name || 'Guest'}</Text>
-                    <Text style={styles.email}>{userDetails.email || 'Guest@gmail.com'}</Text>
+                    {
+                      isUserLoading  ?
+                        <TextSkeleton width={150} />
+                        :
+                        <Text style={styles.name}>{userDetailsData?.Name}</Text>
+                    }
+                    {
+                      isUserLoading  ?
+                        <TextSkeleton width={100} />
+                        :
+                        <Text style={styles.email}>{userDetailsData?.email}</Text>
+                    }
+
                   </View>
-                  {userDetails && (
-                    <TouchableOpacity style={styles.editButton} onPress={()=> navigate('Edit Profile')}>
-                      <Text style={styles.editText}>Edit Profile</Text>
-                    </TouchableOpacity>
-                  )}
+                  {isUserLoading  ?
+                    <TextSkeleton width={120} height={50}/>
+                    : (
+                      <TouchableOpacity style={styles.editButton} onPress={() => navigate('Edit Profile')}>
+                        <Text style={styles.editText}>Edit Profile</Text>
+                      </TouchableOpacity>
+                    )}
                 </View>
                 <View>
                   <StatsSection />
@@ -188,7 +210,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '700',
     textAlign: 'center',
-    textTransform:'capitalize'
+    textTransform: 'capitalize'
   },
   email: {
     fontSize: 16,

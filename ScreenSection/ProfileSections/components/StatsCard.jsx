@@ -10,8 +10,8 @@ const StatsCard = ({ imageSource, title, subtitle }) => {
                 resizeMode="cover"
             />
             <View>
-                <Text style={{ fontSize: 24, fontWeight: '700' }}>{title}</Text>
-                <Text style={{ fontWeight: '700', color: '#9098A3', fontSize: 16 }}>{subtitle}</Text>
+                <Text style={{ fontSize: 20, fontWeight: '700' }}>{title}</Text>
+                <Text style={{ fontWeight: '700', color: '#9098A3', fontSize: 14 }}>{subtitle}</Text>
             </View>
         </View>
     )
