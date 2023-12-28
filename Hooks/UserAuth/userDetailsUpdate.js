@@ -12,6 +12,7 @@ const useUpdateUserDetails = ()=>{
         const id = userDetails._id;
         const data = {Name , id}
         try {
+            console.log(BASE_URL)
             // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint for user registration
             const response = await fetch(`${BASE_URL}/editProfile`, {
                 method: 'PUT',
