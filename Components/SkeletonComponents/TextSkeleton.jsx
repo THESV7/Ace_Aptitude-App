@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 
-const TextSkeleton = ({ width ,height}) => {
+const TextSkeleton = ({ width ,height }) => {
   const [animation] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -37,18 +37,16 @@ const TextSkeleton = ({ width ,height}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Animated.View style={[styles.skeletonText, skeletonStyle]} />
-    </View>
+      <Animated.View style={[styles.skeletonText, skeletonStyle ]} />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
+  // container: {
+  //   alignItems:'center',
+  //   justifyContent:'center',
+  //   paddingHorizontal: 20,
+  // },
   skeletonText: {
     marginBottom: 10,
   },

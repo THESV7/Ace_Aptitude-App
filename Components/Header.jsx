@@ -4,8 +4,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import usegetAsyncStorage from '../Hooks/UserAuth/getAsyncStorageDetails';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import TextSkeleton from './SkeletonComponents/TextSkeleton';
 
-const Header = ({ onMenuPress, userDetails }) => {
+const Header = ({ onMenuPress, userDetails, isLoading }) => {
     // const [userDetail, setUserDetail] = useState([])
     // const { handleUserAuthinticate } = usegetAsyncStorage()
     // useFocusEffect(
@@ -22,12 +23,28 @@ const Header = ({ onMenuPress, userDetails }) => {
             <View style={{ flex: 1, flexDirection: 'row', paddingBottom: 10, alignItems: 'center', paddingHorizontal: 20 }}>
                 <TouchableWithoutFeedback >
                     <View style={{ flex: 1 }}>
-                        <Image source={{ uri: userDetails?.profileImage }} style={{ width: 50, height: 50, borderRadius: 100 }} />
+                        {
+                            isLoading ?
+                                <Image style={{ width: 50, height: 50, borderRadius: 100, backgroundColor: '#E0E0E0' }} />
+                                :
+                                <Image source={{ uri: userDetails?.profileImage }} style={{ width: 50, height: 50, borderRadius: 100 }} />
+                        }
                     </View>
                 </TouchableWithoutFeedback>
                 <View style={{ paddingVertical: 20, flex: 4 }}>
-                    <Text style={{ fontSize: 16, fontWeight: '600', color: '#7d828a' }}>Welcome Back!</Text>
-                    <Text style={{ fontSize: 22, fontWeight: '700', color: '#152946',textTransform:'capitalize' }}>{userDetails?.Name || 'Guest'}</Text>
+                    {
+                        isLoading ?
+                            <>
+                                <TextSkeleton width={100} height={12}/>
+                                <TextSkeleton width={200} height={20}/>
+                            </>
+                            :
+                            <>
+                                <Text style={{ fontSize: 16, fontWeight: '600', color: '#7d828a' }}>Welcome Back!</Text>
+                                <Text style={{ fontSize: 22, fontWeight: '700', color: '#152946', textTransform: 'capitalize' }}>{userDetails?.Name}</Text>
+                            </>
+                    }
+
                 </View>
                 <TouchableWithoutFeedback onPress={onMenuPress}>
                     <View style={{ flex: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#e9e9ff', padding: 8, borderRadius: 10 }}>

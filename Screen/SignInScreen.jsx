@@ -23,8 +23,7 @@ const SignInScreen = () => {
 
   const handleSignIn =async() => {
     const Email = email.toLowerCase()
-    const Password = password.toLowerCase()
-    await userLogin(Email,Password)
+    await userLogin(Email,password)
   }
 
   useEffect(()=>{

@@ -11,13 +11,14 @@ import { useNavigation } from '@react-navigation/native';
 import { useFocusEffect, useIsFocused, useRoute } from '@react-navigation/native';
 import SideBar from '../Components/SideBar';
 import usegetAsyncStorage from '../Hooks/UserAuth/getAsyncStorageDetails';
+import useUserDetails from '../Hooks/UserAuth/userDetials';
 
 const HomeScreen = () => {
 
     const navigation = useNavigation()
     const [lastBackPressed, setLastBackPressed] = useState(0);
     const [showSidebar, setShowSidebar] = useState(false);
-
+    const { data: userDetailsData, isUserLoading, getUserDetails, clear } = useUserDetails();
     const toggleSidebar = () => {
         setShowSidebar(!showSidebar);
     };
@@ -50,27 +51,17 @@ const HomeScreen = () => {
         useCallback(() => {
             const getDetails = async () => {
                 const userDetails = await handleUserAuthinticate();
-                setUserDetails(userDetails)
+                getUserDetails(userDetails._id);
             }
             getDetails()
         }, [])
     )
-
-    const clearAsyncStorage = async () => {
-        try {
-            await AsyncStorage.clear();
-            navigation.navigate('SignUp')
-            console.log('AsyncStorage cleared successfully.');
-        } catch (error) {
-            console.error('Error clearing AsyncStorage:', error);
-        }
-    };
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar style='auto' />
             <ScrollView>
                 <View style={styles.content}>
-                    <Header onMenuPress={toggleSidebar} userDetails={userDetails}/>
+                    <Header onMenuPress={toggleSidebar} userDetails={userDetailsData} isLoading={isUserLoading}/>
                     <Banner />
                     <CategorySelection />
                     <RecommandedSection />

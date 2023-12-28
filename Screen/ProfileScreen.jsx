@@ -15,7 +15,7 @@ import useCustomNavigation from '../Hooks/Navigation/Navigate';
 import useUserDetails from '../Hooks/UserAuth/userDetials';
 import TextSkeleton from '../Components/SkeletonComponents/TextSkeleton';
 import ImageSkeleton from '../Components/SkeletonComponents/ImageSkeleton';
-
+import { MaterialIcons } from '@expo/vector-icons';
 
 const ProfileScreen = () => {
   const [userDetails, setUserDetails] = useState([]);
@@ -105,8 +105,8 @@ const ProfileScreen = () => {
                 </View>
                 <View>
                   {
-                    isUserLoading  ?
-                    <ImageSkeleton/>
+                    isUserLoading ?
+                      <ImageSkeleton />
                       :
                       <Image
                         source={{ uri: userDetailsData?.profileImage }} // Replace with your image source
@@ -123,21 +123,26 @@ const ProfileScreen = () => {
                 <View style={{ flex: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
                   <View>
                     {
-                      isUserLoading  ?
+                      isUserLoading ?
                         <TextSkeleton width={150} />
                         :
-                        <Text style={styles.name}>{userDetailsData?.Name}</Text>
+                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                          <Text style={styles.name}>{userDetailsData?.Name}</Text>
+                          <Text style={{ marginTop: 8 }}>{userDetailsData?.isVerified && <MaterialIcons name="verified" size={24} color="#6674cc" />}</Text>
+                        </View>
                     }
                     {
-                      isUserLoading  ?
-                        <TextSkeleton width={100} />
+                      isUserLoading ?
+                        <View style={{alignItems:'center',justifyContent:'center',}}>
+                          <TextSkeleton width={100} />
+                        </View>
                         :
                         <Text style={styles.email}>{userDetailsData?.email}</Text>
                     }
 
                   </View>
-                  {isUserLoading  ?
-                    <TextSkeleton width={120} height={50}/>
+                  {isUserLoading ?
+                    <TextSkeleton width={120} height={50} />
                     : (
                       <TouchableOpacity style={styles.editButton} onPress={() => navigate('Edit Profile')}>
                         <Text style={styles.editText}>Edit Profile</Text>
@@ -210,7 +215,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '700',
     textAlign: 'center',
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
   },
   email: {
     fontSize: 16,
