@@ -124,7 +124,7 @@ const ProfileScreen = () => {
                   <View>
                     {
                       isUserLoading ?
-                        <TextSkeleton width={150} />
+                        <TextSkeleton width={200} mb={10}/>
                         :
                         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4 }}>
                           <Text style={styles.name}>{userDetailsData?.Name}</Text>
@@ -134,7 +134,7 @@ const ProfileScreen = () => {
                     {
                       isUserLoading ?
                         <View style={{alignItems:'center',justifyContent:'center',}}>
-                          <TextSkeleton width={100} />
+                          <TextSkeleton width={150}/>
                         </View>
                         :
                         <Text style={styles.email}>{userDetailsData?.email}</Text>

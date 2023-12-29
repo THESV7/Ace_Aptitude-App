@@ -62,9 +62,9 @@ const HomeScreen = () => {
             <ScrollView>
                 <View style={styles.content}>
                     <Header onMenuPress={toggleSidebar} userDetails={userDetailsData} isLoading={isUserLoading}/>
-                    <Banner />
-                    <CategorySelection />
-                    <RecommandedSection />
+                    <Banner isLoading={isUserLoading}/>
+                    <CategorySelection isLoading={isUserLoading} />
+                    <RecommandedSection isLoading={isUserLoading}/>
                     {/* <TouchableOpacity style={{ padding: 20, backgroundColor: 'blue' }} onPress={()=>navigation.navigate('SignIn')}>
                         <Text>go to login temp</Text>
                     </TouchableOpacity> */}
@@ -72,7 +72,7 @@ const HomeScreen = () => {
             </ScrollView>
             {
                 showSidebar &&
-                <SideBar toggle={showSidebar} onClose={(toogle) => setShowSidebar(toogle)} userDetails={userDetails} />
+                <SideBar toggle={showSidebar} onClose={(toogle) => setShowSidebar(toogle)} userDetails={userDetailsData} />
             }
         </SafeAreaView>
     );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 
-const TextSkeleton = ({ width ,height,mb }) => {
+const ViewSkeleton = ({ width ,height ,borderRadius}) => {
   const [animation] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -32,8 +32,8 @@ const TextSkeleton = ({ width ,height,mb }) => {
     }),
     width, // Utilizing the width prop here
     height: height || 25,
-    marginBottom: mb || 0,
-    borderRadius: 5,
+    marginBottom: 10,
+    borderRadius: borderRadius || 10,
   };
 
   return (
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TextSkeleton;
+export default ViewSkeleton;

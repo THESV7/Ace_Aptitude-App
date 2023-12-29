@@ -35,8 +35,8 @@ const Header = ({ onMenuPress, userDetails, isLoading }) => {
                     {
                         isLoading ?
                             <>
-                                <TextSkeleton width={100} height={12}/>
-                                <TextSkeleton width={200} height={20}/>
+                                <TextSkeleton width={80} height={12} mb={4} />
+                                <TextSkeleton width={150} height={20} />
                             </>
                             :
                             <>
@@ -46,11 +46,17 @@ const Header = ({ onMenuPress, userDetails, isLoading }) => {
                     }
 
                 </View>
-                <TouchableWithoutFeedback onPress={onMenuPress}>
-                    <View style={{ flex: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#e9e9ff', padding: 8, borderRadius: 10 }}>
-                        <Ionicons name="ios-menu" size={32} color="black" />
-                    </View>
-                </TouchableWithoutFeedback>
+                {
+                    isLoading ?
+                    <TextSkeleton width={45} height={45}/>
+                    :
+                        <TouchableWithoutFeedback onPress={onMenuPress}>
+                            <View style={{ flex: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#e9e9ff', padding: 8, borderRadius: 10 }}>
+                                <Ionicons name="ios-menu" size={32} color="black" />
+                            </View>
+                        </TouchableWithoutFeedback>
+
+                }
             </View>
         </>
     )
