@@ -51,7 +51,6 @@ const NotificationScreen = () => {
       <CustomHeader title={'Notification'} flexValue={2} />
       <View style={styles.notificationContainer}>
         {
-          !isNotificationLoading &&
             responseData?.map((data) => (
               <NotificationCard
                 key={data?._id}

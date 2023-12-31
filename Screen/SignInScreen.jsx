@@ -57,7 +57,7 @@ const SignInScreen = () => {
               value={password}
               secureTextEntry={true}
             />
-            <TouchableOpacity style={{ backgroundColor: '#6674CC', padding: 15, borderRadius: 15, alignItems: 'center' }}
+            <TouchableOpacity disabled={isLoading} style={{ backgroundColor: isLoading ? "#CCCCCC": '#6674CC', padding: 15, borderRadius: 15, alignItems: 'center' }}
               onPress={handleSignIn}>
               <Text style={{ color: 'white', fontWeight: '700', fontSize: 16 }}>Sign In</Text>
             </TouchableOpacity>

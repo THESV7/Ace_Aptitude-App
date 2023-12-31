@@ -73,7 +73,7 @@ const SignUpScreen = () => {
               value={confirmpassword}
               secureTextEntry={true}
             />
-            <TouchableOpacity style={{ backgroundColor: '#6674CC', padding: 15, borderRadius: 15, alignItems: 'center' }}
+            <TouchableOpacity disabled={isLoading} style={{ backgroundColor: isLoading ? "#CCCCCC": '#6674CC', padding: 15, borderRadius: 15, alignItems: 'center' }}
               onPress={handleRegister}>
               <Text style={{ color: 'white', fontWeight: '700', fontSize: 16 }}>Register</Text>
             </TouchableOpacity>
