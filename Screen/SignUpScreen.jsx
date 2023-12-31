@@ -28,7 +28,8 @@ const SignUpScreen = () => {
   useEffect(() => {
     if (!isLoading && responseData) {
       handleStoreData()
-      navigation.navigate('OtpVerify',{email:email})
+      const Email = email.toLowerCase()
+      navigation.navigate('OtpVerify',{email:Email})
     }
   }, [responseData, isLoading]);
 
