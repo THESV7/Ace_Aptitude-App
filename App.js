@@ -25,6 +25,9 @@ import NotificationScreen from './Screen/NotificationScreen'
 import PrivacyScreen from './Screen/PrivacyPolicyScreen'
 import ReportProblemScreen from './Screen/ReportProblemScreen'
 import VerifyOtpScreen from './Screen/VerifyOtpScreen'
+import StartTestScreen from './Screen/StartTestScreen'
+import QuesionsScreen from './Screen/QuesionsScreen'
+import ScoreScreen from './Screen/ScoreScreen'
 const App = () => {
   return (
     <>
@@ -36,6 +39,9 @@ const App = () => {
           <Stack.Screen name='OtpVerify' component={VerifyOtpScreen} />
           <Stack.Screen name='SignIn' component={SignInScreen} />
           <Stack.Screen name='Tabs' component={TabNavigator} />
+          <Stack.Screen name='Start Test' component={StartTestScreen} />
+          <Stack.Screen name='Question Solving' component={QuesionsScreen} />
+          <Stack.Screen name='Score' component={ScoreScreen} />
           <Stack.Screen name='Dashboard' component={DashBoardScreen} />
           <Stack.Screen name='Settings' component={SettingsScreen} />
           <Stack.Screen name='Edit Profile' component={EditProfileScreen} />

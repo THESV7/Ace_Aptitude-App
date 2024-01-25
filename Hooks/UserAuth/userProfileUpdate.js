@@ -15,7 +15,7 @@ const useUserProfileUpdate = () => {
             setIsLoading(true);
             const userDetails = await handleUserAuthinticate();
             const userId = userDetails._id;
-            const response = await fetch(`${BASE_URL}/upload-profile-image/${userId}`, {
+            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/upload-profile-image/${userId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -37,6 +37,7 @@ const EditProfileScreen = () => {
             const getDetails = async () => {
                 const userDetails = await handleUserAuthinticate();
                 setUserDetails(userDetails);
+                setName(userDetails.Name)
             };
             getDetails();
         }, [isUserUpdateLoading])
@@ -126,7 +127,7 @@ const EditProfileScreen = () => {
                                 {/* Input for Name */}
                                 <TextInput
                                     style={styles.inputField}
-                                    value={Name || userDetails.Name}
+                                    value={Name}
                                     onChangeText={setName}
                                 />
                             </View>

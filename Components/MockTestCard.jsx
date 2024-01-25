@@ -1,11 +1,14 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const MockTestCard = () => {
+
+    const navigation = useNavigation()
     // Demo data for the mock test cards
     const testData = [
         {
-            title: 'Demo Test 1',
+            title: 'General Aptitude',
             time: 30, // Time in minutes
             questions: 20, // Number of questions
         },
@@ -21,10 +24,14 @@ const MockTestCard = () => {
         },
     ];
 
+    const handleStartTest = (title,time,NoOfQuestions) => {
+        navigation.navigate('Start Test', { category: title, time:time,NoOfQuestions:NoOfQuestions })
+    }
+
     return (
         <View>
             {testData.map((test, index) => (
-                <TouchableOpacity style={styles.card} key={index}>
+                <TouchableOpacity style={styles.card} key={index} onPress={()=>handleStartTest(test.title,test.time,test.questions)}>
                     <View style={styles.detailsContainer}>
                         <View style={styles.titleContainer}>
                             <Text style={styles.title}>{test.title}</Text>

@@ -126,7 +126,7 @@ const ProfileScreen = () => {
                       isUserLoading ?
                         <TextSkeleton width={200} mb={10}/>
                         :
-                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4 ,justifyContent:'center'}}>
                           <Text style={styles.name}>{userDetailsData?.Name}</Text>
                           <Text style={{ marginTop: 8 }}>{userDetailsData?.isVerified && <MaterialIcons name="verified" size={24} color="#6674cc" />}</Text>
                         </View>

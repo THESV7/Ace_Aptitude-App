@@ -1,20 +1,34 @@
 
 import { useState } from "react";
 import { BASE_URL } from '@env';
-const useUserLogin = () => {
+const usePostUserTest = () => {
     const [responseData, setResponseData] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    
+    const userTestPost = async (testName,timeTaken,questionCategory,score,CoinCount) => {
 
-    const userLogin = async (email,password) => {
+        const requestData = {
+            userId: id,
+            tests: [
+                {
+                    testName: testName,
+                    score: parseInt(score),
+                    dateTaken: new Date(),
+                    durationMinutes: timeTaken,
+                    category: questionCategory,
+                },
+            ],
+            coins: CoinCount
+        }
         setIsLoading(true)
         try {
-            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/login`, {
+            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/tests`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({email,password}),
+                body: JSON.stringify(requestData),
             })
 
             if(response.ok){
@@ -36,7 +50,7 @@ const useUserLogin = () => {
         setIsLoading(false);
         setError(null);
     };
-    return { responseData, isLoading, error,clearData, userLogin }
+    return { responseData, isLoading, error,clearData, userTestPost }
 }
 
-export default useUserLogin;
+export default usePostUserTest;
