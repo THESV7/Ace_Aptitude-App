@@ -1,29 +1,27 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BASE_URL } from '@env';
+import usegetAsyncStorage from "../UserAuth/getAsyncStorageDetails";
 const usePostUserTest = () => {
     const [responseData, setResponseData] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    
-    const userTestPost = async (testName,timeTaken,questionCategory,score,CoinCount) => {
 
+    const userTestPost = async (data, coinCount) => {
+
+        const { handleUserAuthinticate } = usegetAsyncStorage()
+        const userDetails = await handleUserAuthinticate()
+        const id = userDetails._id
         const requestData = {
             userId: id,
             tests: [
-                {
-                    testName: testName,
-                    score: parseInt(score),
-                    dateTaken: new Date(),
-                    durationMinutes: timeTaken,
-                    category: questionCategory,
-                },
+                data
             ],
-            coins: CoinCount
+            coins: coinCount
         }
         setIsLoading(true)
         try {
-            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/tests`, {
+            const response = await fetch(`http://192.168.0.104:5000/api/tests`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -31,12 +29,12 @@ const usePostUserTest = () => {
                 body: JSON.stringify(requestData),
             })
 
-            if(response.ok){
+            if (response.ok) {
                 const data = await response.json()
                 setResponseData(data)
                 setIsLoading(false)
             }
-            else{
+            else {
                 throw new Error('User Can not login');
             }
         } catch (error) {
@@ -50,7 +48,7 @@ const usePostUserTest = () => {
         setIsLoading(false);
         setError(null);
     };
-    return { responseData, isLoading, error,clearData, userTestPost }
+    return { responseData, isLoading, error, clearData, userTestPost }
 }
 
 export default usePostUserTest;

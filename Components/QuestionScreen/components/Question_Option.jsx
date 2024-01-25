@@ -5,9 +5,9 @@ import QuestionNavigatingButton from '../QuestionNavigatingButton';
 import { useNavigation } from '@react-navigation/native';
 import usePostUserTest from '../../../Hooks/TestDetails/postUserGivenTest';
 
-const Question_Option = ({ data, setcurrentIndex, timeOver }) => {
+const Question_Option = ({ data, setcurrentIndex, timeOver , timeTaken }) => {
     const [selectedOptions, setSelectedOptions] = useState(new Array(data.length).fill(null));
-    const {responseData, isLoading, error,clearData, userTestPost}=usePostUserTest()
+    const { responseData, isLoading, error, clearData, userTestPost } = usePostUserTest()
     const navigation = useNavigation()
     useEffect(() => {
         if (timeOver) {
@@ -35,7 +35,31 @@ const Question_Option = ({ data, setcurrentIndex, timeOver }) => {
         }
     };
 
-    const handleSubmit = () => {
+    const countCoins = (score) => {
+        // Calculate the user's percentage score
+        const percentageScore = (score / data.length) * 100;
+
+        // Calculate coinsEarned based on the percentage score
+        let coinsEarned = 0;
+
+        if (percentageScore == 0) {
+            coinsEarned = 0;
+        }
+        else if (percentageScore <= 50) {
+            coinsEarned = 1;
+        } else if (percentageScore <= 70) {
+            coinsEarned = 3;
+        } else if (percentageScore <= 100) {
+            coinsEarned = 5;
+        }
+
+        // Ensure coinsEarned is a positive integer
+        coinsEarned = Math.max(0, coinsEarned);
+
+        return coinsEarned;
+    }
+
+    const handleSubmit = async () => {
         let score = 0;
         let results = [];
 
@@ -54,11 +78,20 @@ const Question_Option = ({ data, setcurrentIndex, timeOver }) => {
                 questionText: question.questionText,
                 options: question.options.map((option, optionIndex) => ({
                     text: option,
-                    isCorrect: option === question.correctOption &&  optionIndex === selectedOptionIndex,
+                    isCorrect: option === question.correctOption && optionIndex === selectedOptionIndex,
                     isSelected: optionIndex === selectedOptionIndex,
                 })),
             });
         });
+        const coinCount = countCoins(score)
+        const postScoreData = {
+            testName: data[0].category,
+            score: parseInt(score),
+            dateTaken: new Date(),
+            durationMinutes: timeTaken,
+            category: data[0].category,
+        }
+        await userTestPost(postScoreData,coinCount)
         navigation.navigate('Score', { score, results }); // Pass results along with the score
     };
 

@@ -6,7 +6,7 @@ const StatsSection = () => {
 
   const cardData = [
     {
-      imageSource: require('../../../assets/TestNo.png'),
+      imageSource: require('../../../assets/Accuracy.png'),
       title: '53',
       subtitle: 'Tests Taken',
     },
@@ -16,9 +16,9 @@ const StatsSection = () => {
       subtitle: 'Leaderboard',
     },
     {
-      imageSource: require('../../../assets/Accuracy.png'),
-      title: '90%',
-      subtitle: 'Accuracy',
+      imageSource: require('../../../assets/coinThender.png'),
+      title: '7',
+      subtitle: 'Coins',
     },
     {
       imageSource: require('../../../assets/Performance.png'),

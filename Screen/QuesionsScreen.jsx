@@ -24,15 +24,15 @@ const QuesionsScreen = () => {
     );
 
     const route = useRoute()
-    const { category, time, NoOfQuestions , difficulty } = route.params
+    const { category, time, NoOfQuestions, difficulty } = route.params
     const [isModalOpen, setIsModalOpen] = useState(false)
     const { getQuetions, isQuestionsLoading, error, responseData } = useGetQuetions()
     useEffect(() => {
-        if(category&&NoOfQuestions){
-            getQuetions(category, NoOfQuestions,'Mock')
+        if (category && NoOfQuestions) {
+            getQuetions(category, NoOfQuestions, 'Mock')
         }
-        else if(category){
-            getQuetions(category,20,'Practice',difficulty,)
+        else if (category) {
+            getQuetions(category, 20, 'Practice', difficulty,)
         }
     }, [])
 
@@ -73,7 +73,7 @@ const QuesionsScreen = () => {
     const formatTime = () => {
         const minutes = Math.floor(remainingTime / 60);
         const seconds = remainingTime % 60;
-    
+
         if (minutes > 0) {
             if (seconds > 0) {
                 return `${minutes} min ${seconds} s`;
@@ -121,7 +121,12 @@ const QuesionsScreen = () => {
 
                                 {/* Question and option component */}
                                 <View style={{ paddingHorizontal: 20, paddingTop: 10 }}>
-                                    <Question_Option data={responseData} setcurrentIndex={questionindex} timeOver={timeOver} />
+                                    <Question_Option
+                                        data={responseData}
+                                        setcurrentIndex={questionindex}
+                                        timeOver={timeOver}
+                                        timeTaken={time - Math.floor(remainingTime / 60)} // Pass the time taken in minutes
+                                    />
                                 </View>
                             </View>
                         </View>
