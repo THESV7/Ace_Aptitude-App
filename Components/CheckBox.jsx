@@ -2,7 +2,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 const CheckBox = ({ data, checked, onChange }) => {
     const handleCheck = () => {
-        onChange(data);
+        if (checked) {
+            onChange(''); // Uncheck the checkbox if it's already checked
+        } else {
+            onChange(data); // Check the checkbox
+        }
     };
     return (
         <>

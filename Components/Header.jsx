@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import usegetAsyncStorage from '../Hooks/UserAuth/getAsyncStorageDetails';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import TextSkeleton from './SkeletonComponents/TextSkeleton';
+import ViewSkeleton from './SkeletonComponents/ViewSkeleton';
 
 const Header = ({ onMenuPress, userDetails, isLoading }) => {
     // const [userDetail, setUserDetail] = useState([])
@@ -25,7 +26,7 @@ const Header = ({ onMenuPress, userDetails, isLoading }) => {
                     <View style={{ flex: 1 }}>
                         {
                             isLoading ?
-                                <Image style={{ width: 50, height: 50, borderRadius: 100, backgroundColor: '#E0E0E0' }} />
+                                <ViewSkeleton width={50} height={50} borderRadius={100}/>
                                 :
                                 <Image source={{ uri: userDetails?.profileImage }} style={{ width: 50, height: 50, borderRadius: 100 }} />
                         }

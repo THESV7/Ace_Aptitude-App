@@ -36,7 +36,7 @@ const usePracticeTestDetails = () => {
         setError(null);
     };
 
-    return { responseData, error, isLoading, getPracticeTestDetails ,clearData}
+    return { responseData, error,setIsLoading, isLoading, getPracticeTestDetails ,clearData}
 }
 
 export default usePracticeTestDetails;

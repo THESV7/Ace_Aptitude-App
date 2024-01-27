@@ -70,10 +70,10 @@ const EditProfileScreen = () => {
                 });
                 formData.append('upload_preset', 'Profile_Image_upload'); // Replace with your Cloudinary upload preset
 
-                const apiKey = `${API_KEY}`
-                const apiSecret = `${API_SECRET}`
+                const apiKey = "537622161437147"
+                const apiSecret = "pYnAsthvi-kY5FpXWzO3PTnNl-A"
                 // Make an API call to Cloudinary to upload the image
-                const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+                const response = await fetch(`https://api.cloudinary.com/v1_1/dmrjruik5/image/upload`, {
                     method: 'POST',
                     body: formData,
                     headers: {

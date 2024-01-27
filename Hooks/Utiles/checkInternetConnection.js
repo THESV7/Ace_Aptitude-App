@@ -4,11 +4,13 @@ import NetInfo from '@react-native-community/netinfo';
 
 const useInternetConnection = () => {
   const [isConnected, setIsConnected] = useState(null);
-
+  const [isConnectionLoading,setIsConnectionLoading]=useState(false)
   useEffect(() => {
     const checkInternetConnection = async () => {
+      setIsConnectionLoading(true)
       const state = await NetInfo.fetch();
       setIsConnected(state.isConnected);
+      setIsConnectionLoading(false)
     };
 
     // Check initial internet connection status
@@ -25,7 +27,7 @@ const useInternetConnection = () => {
     };
   }, []); // Empty dependency array ensures that the effect runs only once when the component mounts
 
-  return isConnected;
+  return {isConnected,isConnectionLoading};
 };
 
 export default useInternetConnection;

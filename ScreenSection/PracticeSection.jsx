@@ -3,25 +3,38 @@ import { Ionicons } from '@expo/vector-icons';
 import filterIcon from '../assets/filterIcon.png';
 import TestCard from '../Components/TestCard';
 import usePracticeTestDetails from '../Hooks/TestDetails/PracticeTestDetails';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ModalFilter from '../Components/ModalFilter';
 import SkeletonTestCard from '../Components/SkeletonComponents/SkeletonTestCard';
 import useCheckTheme from '../Hooks/Theme/checkSystemTheme'
+import { useFocusEffect } from '@react-navigation/native';
 const PracticeSection = () => {
     const [filterToggle, setFilterToggle] = useState(false);
-    const [isDataFetched, setIsDataFetched] = useState(false); // State to track data fetching
-    const { responseData, error, isLoading, getPracticeTestDetails } = usePracticeTestDetails();
+    const [dataFetched, setDataFetched] = useState(null); // State to track data fetching
+    const { responseData, error,setIsLoading, isLoading, getPracticeTestDetails } = usePracticeTestDetails();
 
-    const {CurrentTheme } = useCheckTheme()
-    useEffect(() => {
-        if (!isDataFetched) {
+    const { CurrentTheme } = useCheckTheme()
+
+    
+    useFocusEffect(
+        useCallback(() => {
             const fetchTestDetails = async () => {
                 await getPracticeTestDetails();
-                setIsDataFetched(true); // Set to true after fetching data
             };
             fetchTestDetails();
+
+            return ()=> {setDataFetched(null)}
+        }, [])
+    );
+
+
+
+    useEffect(()=>{
+        if(!isLoading){
+            setDataFetched(responseData)
         }
-    }, [isDataFetched]);
+    },[isLoading])
+
 
 
     const handleFilterToggle = () => {
@@ -46,14 +59,15 @@ const PracticeSection = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.CardContainer}>
-                    {!isDataFetched ? ( // Display skeleton loader while data is loading
-                        <SkeletonTestCard count={10}/>
-                    ) : (
-                        responseData.map((data) => <TestCard testData={data} key={data._id} />)
-                    )}
+                    {
+                        isLoading ? ( // Display skeleton loader while data is loading
+                            <SkeletonTestCard count={10} />
+                        ) : (
+                            dataFetched?.map((data) => <TestCard testData={data} key={data._id} />)
+                        )}
                 </View>
             </View>
-            <ModalFilter visibility={filterToggle} OnClose={(toggle) => setFilterToggle(toggle)} />
+            <ModalFilter visibility={filterToggle} OnClose={(toggle) => setFilterToggle(toggle)} setFilteredData={(data)=>setDataFetched(data)} setIsLoading={(data)=>setIsLoading(data)} clear={()=>getPracticeTestDetails()}/>
         </>
     )
 }

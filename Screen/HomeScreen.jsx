@@ -55,7 +55,7 @@ const HomeScreen = () => {
     );
 
     const { handleUserAuthinticate } = usegetAsyncStorage();
-    const isConnected = useInternetConnection(); // Use the hook to get the internet connection status
+    const {isConnected,isConnectionLoading} = useInternetConnection(); // Use the hook to get the internet connection status
 
     useFocusEffect(
         useCallback(() => {
@@ -64,6 +64,8 @@ const HomeScreen = () => {
                 getUserDetails(userDetails._id);
             };
             getDetails();
+
+            return ()=> {clear()}
         }, [])
     );
     return (
@@ -73,6 +75,7 @@ const HomeScreen = () => {
                 !isConnected ?
                     <OfflineScreen />
                     :
+                !isConnectionLoading &&
                     <ScrollView>
                         <View style={styles.content}>
                             <Header onMenuPress={toggleSidebar} userDetails={userDetailsData} isLoading={isUserLoading} />

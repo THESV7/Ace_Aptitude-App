@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const TestCard = ({ testData, isLoading }) => {
+const TestCard = ({ testData }) => {
 
   const navigation = useNavigation()
   const { category, subtopic, difficulty } = testData

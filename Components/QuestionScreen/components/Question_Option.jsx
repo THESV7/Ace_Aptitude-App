@@ -5,7 +5,7 @@ import QuestionNavigatingButton from '../QuestionNavigatingButton';
 import { useNavigation } from '@react-navigation/native';
 import usePostUserTest from '../../../Hooks/TestDetails/postUserGivenTest';
 
-const Question_Option = ({ data, setcurrentIndex, timeOver , timeTaken }) => {
+const Question_Option = ({ data, setcurrentIndex, timeOver, timeTaken }) => {
     const [selectedOptions, setSelectedOptions] = useState(new Array(data.length).fill(null));
     const { responseData, isLoading, error, clearData, userTestPost } = usePostUserTest()
     const navigation = useNavigation()
@@ -91,7 +91,7 @@ const Question_Option = ({ data, setcurrentIndex, timeOver , timeTaken }) => {
             durationMinutes: timeTaken,
             category: data[0].category,
         }
-        await userTestPost(postScoreData,coinCount)
+        await userTestPost(postScoreData, coinCount)
         navigation.navigate('Score', { score, results }); // Pass results along with the score
     };
 
@@ -121,7 +121,9 @@ const Question_Option = ({ data, setcurrentIndex, timeOver , timeTaken }) => {
                 ))}
             </View>
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <QuestionNavigatingButton buttonText="Previous" onPress={goBack} />
+                {
+                    < QuestionNavigatingButton buttonText="Previous" onPress={goBack} style={currentQuestionIndex == 0 && {opacity:0}}/>
+                }
                 {isLastQuestion ? (
                     <QuestionNavigatingButton buttonText="Submit" onPress={handleSubmit} />
                 ) : (
