@@ -5,7 +5,8 @@ import Category1 from '../assets/CategoryImg(1).png'
 import Category2 from '../assets/CategoryImg(2).png'
 import Category3 from '../assets/CategoryImg(3).png'
 import Category4 from '../assets/CategoryImg(4).png'
-const RecommandedSection = () => {
+import TextSkeleton from '../Components/SkeletonComponents/TextSkeleton'
+const RecommandedSection = ({ isLoading }) => {
 
   const recommdedData = [
     {
@@ -36,12 +37,19 @@ const RecommandedSection = () => {
   return (
     <View style={{ paddingVertical: 10, flex: 1 }}>
       <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row' }}>
-        <Text style={{ fontSize: 18, fontWeight: '700',marginHorizontal: 20 }}>Recommanded</Text>
+        {
+          isLoading ?
+            <View style={{ marginHorizontal: 20 }}>
+              <TextSkeleton width={150} height={18}/>
+            </View>
+            :
+            <Text style={{ fontSize: 18, fontWeight: '700', marginHorizontal: 20 }}>Recommanded</Text>
+        }
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {
-          recommdedData.map((data) => 
-            <RecommandedCard key={data.categoryName} recommdedData={data}/>
+          recommdedData.map((data) =>
+            <RecommandedCard key={data.categoryName} recommdedData={data} isLoading={isLoading}/>
           )
         }
       </ScrollView>

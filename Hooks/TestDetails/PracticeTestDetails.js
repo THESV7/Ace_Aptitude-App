@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { BASE_URL } from '@env';
 
 const usePracticeTestDetails = () => {
 
@@ -10,7 +10,7 @@ const usePracticeTestDetails = () => {
     const getPracticeTestDetails = async () => {
         setIsLoading(true)
         try {
-            const resposnse = await fetch('https://ace-aptitude.onrender.com/api/Allcategory')
+            const resposnse = await fetch(`https://ace-aptitude-v1.onrender.com/api/Allcategory`)
             if (!resposnse.ok) {
                 throw new Error('Details not fetched');
             }
@@ -36,7 +36,7 @@ const usePracticeTestDetails = () => {
         setError(null);
     };
 
-    return { responseData, error, isLoading, getPracticeTestDetails ,clearData}
+    return { responseData, error,setIsLoading, isLoading, getPracticeTestDetails ,clearData}
 }
 
 export default usePracticeTestDetails;

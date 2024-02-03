@@ -1,8 +1,11 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const TestCard = ({ testData, isLoading }) => {
+const TestCard = ({ testData }) => {
 
+  const navigation = useNavigation()
+  const { category, subtopic, difficulty } = testData
   const difficultyColor = (data) => {
     switch (data) {
       case 'easy':
@@ -20,6 +23,7 @@ const TestCard = ({ testData, isLoading }) => {
     <>
       <TouchableOpacity
         style={styles.card}
+        onPress={() => navigation.navigate('Start Test', { category: category , difficulty:difficulty , time:20 ,  })}
       >
         <View style={styles.categoryContainer}>
           <Text style={styles.title}>{testData.category}</Text>

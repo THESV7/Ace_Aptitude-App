@@ -12,12 +12,11 @@ import useUserProfileUpdate from '../Hooks/UserAuth/userProfileUpdate';
 import useCustomNavigation from '../Hooks/Navigation/Navigate';
 import useUpdateUserDetails from '../Hooks/UserAuth/userDetailsUpdate';
 import CustomHeader from '../Components/CustomeHeader/CustomHeader';
-
+import { CLOUD_NAME, API_KEY, API_SECRET } from '@env';
 
 const EditProfileScreen = () => {
 
     const [userDetails, setUserDetails] = useState([]);
-    const [email, setEmail] = useState('');
     const [Name, setName] = useState('');
     const { handleUserAuthinticate } = usegetAsyncStorage();
     const { responseData, error, isLoading, uploadImage, clearData } = useUserProfileUpdate();
@@ -38,6 +37,7 @@ const EditProfileScreen = () => {
             const getDetails = async () => {
                 const userDetails = await handleUserAuthinticate();
                 setUserDetails(userDetails);
+                setName(userDetails.Name)
             };
             getDetails();
         }, [isUserUpdateLoading])
@@ -70,8 +70,8 @@ const EditProfileScreen = () => {
                 });
                 formData.append('upload_preset', 'Profile_Image_upload'); // Replace with your Cloudinary upload preset
 
-                const apiKey = '537622161437147'
-                const apiSecret = 'pYnAsthvi-kY5FpXWzO3PTnNl-A'
+                const apiKey = "537622161437147"
+                const apiSecret = "pYnAsthvi-kY5FpXWzO3PTnNl-A"
                 // Make an API call to Cloudinary to upload the image
                 const response = await fetch(`https://api.cloudinary.com/v1_1/dmrjruik5/image/upload`, {
                     method: 'POST',
@@ -98,7 +98,8 @@ const EditProfileScreen = () => {
     };
 
     const handleUpdateProfile = () => {
-        userDetailsUpdate(Name, email)
+        const name = Name.toLowerCase()
+        userDetailsUpdate(name)
     }
 
     return (
@@ -128,15 +129,6 @@ const EditProfileScreen = () => {
                                     style={styles.inputField}
                                     value={Name}
                                     onChangeText={setName}
-                                />
-                            </View>
-                            <View style={{ marginTop: 20 }}>
-                                <Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 5 }}>Email</Text>
-                                {/* Input for Email */}
-                                <TextInput
-                                    style={styles.inputField}
-                                    value={email}
-                                    onChangeText={setEmail}
                                 />
                             </View>
                             {/* Save button */}
@@ -225,6 +217,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 8,
         fontSize: 16,
+        textTransform:'capitalize'
     },
 
     saveButton: {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { BASE_URL } from '@env';
 const useUserRegistration = () => {
     const [responseData, setResponseData] = useState(null);
     const [error, setError] = useState(null);
@@ -12,7 +12,7 @@ const useUserRegistration = () => {
         }
         try {
             // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint for user registration
-            const response = await fetch('http://192.168.0.103:5000/api/signup', {
+            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,6 +29,7 @@ const useUserRegistration = () => {
                 setIsLoading(false);
             }
         } catch (error) {
+            console.log(error)
             setError(error);
             setIsLoading(false);
         }

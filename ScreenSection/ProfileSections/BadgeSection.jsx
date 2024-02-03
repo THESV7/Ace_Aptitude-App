@@ -5,7 +5,7 @@ const BadgeSection = () => {
     return (
         <View style={{ flex: 1, display: 'flex', flexDirection: 'column', paddingBottom: 20 }}>
             <View style={{ flex: 0 , paddingHorizontal: 20}}>
-                <Text style={{ fontSize: 24, fontWeight: '700' }}>Badge</Text>
+                <Text style={{ fontSize: 20, fontWeight: '700' }}>Badge</Text>
             </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} overScrollMode="never" contentContainerStyle={{padding:10, paddingHorizontal:20}} >
                     <View style={styles.card}>

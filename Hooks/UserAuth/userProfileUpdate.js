@@ -2,7 +2,7 @@ import { useState } from "react";
 import usegetAsyncStorage from "./getAsyncStorageDetails";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useDeleteProfile from "./deleteProfile";
-
+import { BASE_URL } from '@env';
 
 const useUserProfileUpdate = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +15,7 @@ const useUserProfileUpdate = () => {
             setIsLoading(true);
             const userDetails = await handleUserAuthinticate();
             const userId = userDetails._id;
-            const response = await fetch(`http://192.168.0.103:5000/api/upload-profile-image/${userId}`, {
+            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/upload-profile-image/${userId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

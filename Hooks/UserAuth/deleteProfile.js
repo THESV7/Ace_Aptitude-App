@@ -1,8 +1,9 @@
+import { BASE_URL } from '@env';
 const useDeleteProfile = ()=>{
 
     const deleteProfile = async(id)=>{
         try {
-            const response = await fetch(`http://192.168.0.103:5000/api/delete-profile-cloudnary/${id}`,{
+            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/delete-profile-cloudnary/${id}`,{
                 method: 'DELETE'
             })
             const data = await response.json()

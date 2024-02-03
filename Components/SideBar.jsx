@@ -4,6 +4,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import useLogOut from '../Hooks/UserAuth/userLogOut';
 const SideBar = ({ toggle, onClose, userDetails }) => {
   const navigation = useNavigation();
   const screenWidth = Dimensions.get('window').width;
@@ -16,6 +17,8 @@ const SideBar = ({ toggle, onClose, userDetails }) => {
       useNativeDriver: false,
     }).start();
   };
+
+  const { logout } = useLogOut()
 
   const navigate = (route) => {
     onClose(false);
@@ -79,14 +82,18 @@ const SideBar = ({ toggle, onClose, userDetails }) => {
                 </View>
               </TouchableWithoutFeedback>
               <View>
-                <Text style={{ fontSize: 20, fontWeight: '700', color: '#152946' ,textTransform:'capitalize'}}>{userDetails?.Name || 'Guest'}</Text>
+                <Text style={{ fontSize: 20, fontWeight: '700', color: '#152946', textTransform: 'capitalize' }}>{userDetails?.Name || 'Guest'}</Text>
                 <Text style={{ fontSize: 14, fontWeight: '700', color: '#ccc' }} onPress={() => navigate('Profile')}>View profile</Text>
               </View>
             </View>
-            <View style={{ borderTopWidth: 1, borderTopColor: '#ddd', gap: 4 }}>
+            <View style={{ borderTopWidth: 1, borderTopColor: '#ddd', gap: 6 }}>
               <TouchableOpacity onPress={() => navigate('Dashboard')} style={[styles.link, { marginTop: 10 }]}>
                 <Image source={require('../assets/Dashboard.png')} style={{ width: 25, height: 25 }} />
                 <Text style={styles.TextLink}>DashBoard</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigate('Notifications')} style={styles.link}>
+                <Ionicons name="notifications-outline" size={28} />
+                <Text style={styles.TextLink}>Notifications</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => navigate('Settings')} style={styles.link}>
                 <Ionicons name="md-settings-outline" size={28} />
@@ -95,7 +102,7 @@ const SideBar = ({ toggle, onClose, userDetails }) => {
             </View>
           </View>
           <View style={{ flex: 0 }}>
-            <TouchableOpacity onPress={clearAsyncStorage} style={[styles.link, { alignItems: 'center', display: 'flex', paddingBottom: 0 }]}>
+            <TouchableOpacity onPress={logout} style={[styles.link, { alignItems: 'center', display: 'flex', paddingBottom: 0 }]}>
               <Feather name="log-out" size={28} color="black" />
               <Text style={styles.TextLink}>Log out</Text>
             </TouchableOpacity>
@@ -131,7 +138,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   TextLink: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '700'
   }
 });

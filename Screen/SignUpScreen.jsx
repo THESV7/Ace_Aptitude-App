@@ -5,6 +5,7 @@ import useUserRegistration from '../Hooks/UserAuth/UserRegister'
 import SuccessfulModal from '../Components/SuccessfulModal'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import useCustomNavigation from '../Hooks/Navigation/Navigate'
+import { useNavigation } from '@react-navigation/native'
 
 const SignUpScreen = () => {
 
@@ -12,11 +13,10 @@ const SignUpScreen = () => {
   const [Name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmpassword, setComfirmpassword] = useState('');
-  const [profileImage, setProfileImage] = useState('https://res.cloudinary.com/dmrjruik5/image/upload/v1702987210/x8a67paocyiausbp4fkm.png')
-  const [isVisible, setIsVisible] = useState(false)
+  const [profileImage, setProfileImage] = useState('https://tse2.mm.bing.net/th?id=OIP.y5mF55TfUAReTXVp9kGY0AHaHa&pid=Api&P=0&h=180')
   const { responseData, error, isLoading, registerUser } = useUserRegistration()
-
-  const {navigate}=useCustomNavigation()
+  const navigation = useNavigation()
+  const { navigate } = useCustomNavigation()
   const handleStoreData = async () => {
     try {
       await AsyncStorage.setItem('user', JSON.stringify(responseData.user))
@@ -28,16 +28,15 @@ const SignUpScreen = () => {
   useEffect(() => {
     if (!isLoading && responseData) {
       handleStoreData()
-      setIsVisible(true);
+      const Email = email.toLowerCase()
+      navigation.navigate('OtpVerify',{email:Email})
     }
   }, [responseData, isLoading]);
 
   const handleRegister = () => {
     const name = Name.toLowerCase()
     const Email = email.toLowerCase()
-    const Password = password.toLowerCase()
-    const ConfirmPassword = confirmpassword.toLowerCase()
-    registerUser(name, Email, Password, ConfirmPassword, profileImage)
+    registerUser(name, Email, password, confirmpassword, profileImage)
   }
   return (
     <SafeAreaView style={{ padding: 20, flex: 1, backgroundColor: 'white', justifyContent: 'center' }}>
@@ -74,14 +73,14 @@ const SignUpScreen = () => {
               value={confirmpassword}
               secureTextEntry={true}
             />
-            <TouchableOpacity style={{ backgroundColor: '#6674CC', padding: 15, borderRadius: 15, alignItems: 'center' }}
+            <TouchableOpacity disabled={isLoading} style={{ backgroundColor: isLoading ? "#CCCCCC": '#6674CC', padding: 15, borderRadius: 15, alignItems: 'center' }}
               onPress={handleRegister}>
               <Text style={{ color: 'white', fontWeight: '700', fontSize: 16 }}>Register</Text>
             </TouchableOpacity>
-            <Text style={styles.paragraphText}>Have an account? <Text onPress={()=> navigate('SignIn')} style={{ color: '#6674CC' }}>Sign In</Text></Text>
+            <Text style={styles.paragraphText}>Have an account? <Text onPress={() => navigate('SignIn')} style={{ color: '#6674CC' }}>Sign In</Text></Text>
           </View>
         </View>
-        <SuccessfulModal visibility={isVisible} onClose={()=>setIsVisible(false)}/>
+
       </View>
     </SafeAreaView>
   )

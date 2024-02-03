@@ -54,8 +54,8 @@ const LeaderboardScreen = () => {
                     ))
                   ) : (
                     // Render actual leaderboard cards when data is loaded
-                    responseData?.map((details) => (
-                      <LeaderBoardCard key={details.name} cardDetails={details} />
+                    responseData?.map((details , index) => (
+                      <LeaderBoardCard key={details.name} cardDetails={details} position={index+1}/>
                     ))
                   )
                 }

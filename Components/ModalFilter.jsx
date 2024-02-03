@@ -1,10 +1,21 @@
 import { Modal, ScrollView, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BackButton from '../Components/BackButton'
 import CheckBox from './CheckBox'
 import SubTopicSelection from './SubTopicSelection'
-const ModalFilter = ({ visibility, OnClose }) => {
-    
+import useFilter from '../Hooks/TestDetails/filter'
+const ModalFilter = ({ visibility, OnClose ,setFilteredData ,setIsLoading , clear}) => {
+
+
+    const { getFilterData , isLoading ,responseData } = useFilter()
+
+    useEffect(()=>{
+        if(!isLoading){
+            setFilteredData(responseData)
+            setIsLoading(isLoading)
+        }
+    },[isLoading])
+
     const Difficulty = ['Easy', 'Medium', 'Hard',]
 
     const Sortby = ['A-Z', 'Name']
@@ -82,23 +93,27 @@ const ModalFilter = ({ visibility, OnClose }) => {
         setSortBy(selected)
     }
 
-    const handleApply = () => {
-        console.log('Selected Difficulty:', selectedDifficulty);
+    const handleApply = async () => {
+        if (selectedDifficulty !== '' || sortBy !== '') {
+            getFilterData(selectedDifficulty.toLocaleLowerCase(), sortBy)
+        }
         OnClose(false);
     };
 
     const handleClear = () => {
         setSelectedDifficulty('');
+        setSortBy('')
         OnClose(false)
+        clear()
     };
 
     return (
         <View style={{ flex: 1 }}>
-            <Modal transparent={true} visible={visibility} animationType='slide' statusBarTranslucent onRequestClose={()=> OnClose(false)}>
+            <Modal transparent={true} visible={visibility} animationType='slide' statusBarTranslucent onRequestClose={() => OnClose(false)}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <View style={{ flex: 1 }}>
-                            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
+                            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 30 ,marginBottom:20}}>
                                 <View style={{ flex: 1 }}>
                                     <BackButton OnClose={OnClose} />
                                 </View>

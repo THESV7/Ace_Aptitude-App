@@ -6,7 +6,7 @@ const StatsSection = () => {
 
   const cardData = [
     {
-      imageSource: require('../../../assets/TestNo.png'),
+      imageSource: require('../../../assets/Accuracy.png'),
       title: '53',
       subtitle: 'Tests Taken',
     },
@@ -16,9 +16,9 @@ const StatsSection = () => {
       subtitle: 'Leaderboard',
     },
     {
-      imageSource: require('../../../assets/Accuracy.png'),
-      title: '90%',
-      subtitle: 'Accuracy',
+      imageSource: require('../../../assets/coinThender.png'),
+      title: '7',
+      subtitle: 'Coins',
     },
     {
       imageSource: require('../../../assets/Performance.png'),
@@ -30,7 +30,7 @@ const StatsSection = () => {
   return (
     <View style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10, padding: 20 }}>
       <View style={{ flex: 0 }}>
-        <Text style={{ fontSize: 24, fontWeight: '700' }}>Stats</Text>
+        <Text style={{ fontSize: 20, fontWeight: '700' }}>Stats</Text>
       </View>
       <View style={{ flex: 1, flexDirection: 'row', gap: 10, flexWrap: 'wrap' }}>
         {cardData.map((data, index) => (
