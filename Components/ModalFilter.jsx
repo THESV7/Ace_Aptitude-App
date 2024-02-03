@@ -113,7 +113,7 @@ const ModalFilter = ({ visibility, OnClose ,setFilteredData ,setIsLoading , clea
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <View style={{ flex: 1 }}>
-                            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginVertical: 20 }}>
+                            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 30 ,marginBottom:20}}>
                                 <View style={{ flex: 1 }}>
                                     <BackButton OnClose={OnClose} />
                                 </View>

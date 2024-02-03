@@ -13,6 +13,7 @@ const QuesionsScreen = () => {
 
     const [timeOver, setTimeOver] = useState(false);
     const [questionindex, setCurrentQuestionIndex] = useState(0)
+    const [markedQuestions, setMarkedQuestions] = useState([]);
     const navigateToQuestion = (questionIndex) => {
         setCurrentQuestionIndex(questionIndex);
         setIsModalOpen(false); // Close the modal after navigation if needed
@@ -20,7 +21,7 @@ const QuesionsScreen = () => {
 
 
     const renderItem = ({ item, index }) => (
-        <QuestionNoSelector item={item} key={item.id} index={index} navigateToQuestion={navigateToQuestion} />
+        <QuestionNoSelector item={item} key={item.id} index={index} navigateToQuestion={navigateToQuestion} isMarked={markedQuestions}/>
     );
 
     const route = useRoute()
@@ -126,6 +127,8 @@ const QuesionsScreen = () => {
                                         setcurrentIndex={questionindex}
                                         timeOver={timeOver}
                                         timeTaken={time - Math.floor(remainingTime / 60)} // Pass the time taken in minutes
+                                        markedQuestions={markedQuestions}
+                                        setMarkedQuestions={setMarkedQuestions}
                                     />
                                 </View>
                             </View>
@@ -134,7 +137,7 @@ const QuesionsScreen = () => {
             </ScrollView>
             {
                 isModalOpen &&
-                <QuestionNoListModal visibility={isModalOpen} onClose={(toggle) => setIsModalOpen(toggle)} listData={responseData} navigateToQuestion={navigateToQuestion} />
+                <QuestionNoListModal visibility={isModalOpen} onClose={(toggle) => setIsModalOpen(toggle)} listData={responseData} navigateToQuestion={navigateToQuestion}  isMarked={markedQuestions}/>
             }
         </SafeAreaView>
     )

@@ -5,7 +5,7 @@ import QuestionNavigatingButton from '../QuestionNavigatingButton';
 import { useNavigation } from '@react-navigation/native';
 import usePostUserTest from '../../../Hooks/TestDetails/postUserGivenTest';
 
-const Question_Option = ({ data, setcurrentIndex, timeOver, timeTaken }) => {
+const Question_Option = ({ data, setcurrentIndex, timeOver, timeTaken , markedQuestions ,setMarkedQuestions }) => {
     const [selectedOptions, setSelectedOptions] = useState(new Array(data.length).fill(null));
     const { responseData, isLoading, error, clearData, userTestPost } = usePostUserTest()
     const navigation = useNavigation()
@@ -18,6 +18,11 @@ const Question_Option = ({ data, setcurrentIndex, timeOver, timeTaken }) => {
         const updatedOptions = [...selectedOptions];
         updatedOptions[currentQuestionIndex] = selectedOptionIndex;
         setSelectedOptions(updatedOptions);
+        if (markedQuestions.includes(currentQuestionIndex)) {
+            setMarkedQuestions(markedQuestions.filter((index) => index !== currentQuestionIndex));
+        } else {
+            setMarkedQuestions([...markedQuestions, currentQuestionIndex]);
+        }
     };
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const currentQuestion = data[currentQuestionIndex];

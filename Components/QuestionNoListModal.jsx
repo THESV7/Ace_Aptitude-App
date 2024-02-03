@@ -3,7 +3,7 @@ import React from 'react'
 import BackButton from './BackButton'
 import QuestionNoSelector from './QuestionNoSelector'
 
-const QuestionNoListModal = ({ onClose, visibility, listData,navigateToQuestion={navigateToQuestion} }) => {
+const QuestionNoListModal = ({ onClose, visibility, listData, navigateToQuestion={navigateToQuestion} , isMarked}) => {
     return (
         <View >
             <Modal onRequestClose={() => onClose(false)} visible={visibility} animationType='slide'>
@@ -14,7 +14,7 @@ const QuestionNoListModal = ({ onClose, visibility, listData,navigateToQuestion=
                     <View style={{ display: 'flex', flexWrap: 'wrap',flexDirection:'row',paddingHorizontal:20,columnGap:2,rowGap:8}}>
                         {
                             listData.map((item ,index) => (
-                                <QuestionNoSelector item={item} index={index} key={index} navigateToQuestion={navigateToQuestion}/>
+                                <QuestionNoSelector item={item} index={index} key={index} navigateToQuestion={navigateToQuestion} isMarked={isMarked}/>
                             ))
                         }
                     </View>

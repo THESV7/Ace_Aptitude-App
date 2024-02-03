@@ -8,14 +8,17 @@ import ModalFilter from '../Components/ModalFilter';
 import SkeletonTestCard from '../Components/SkeletonComponents/SkeletonTestCard';
 import useCheckTheme from '../Hooks/Theme/checkSystemTheme'
 import { useFocusEffect } from '@react-navigation/native';
+import useGetSearch from '../Hooks/TestDetails/getSearch';
+import debounce from '../Hooks/Utiles/debounce';
 const PracticeSection = () => {
     const [filterToggle, setFilterToggle] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
     const [dataFetched, setDataFetched] = useState(null); // State to track data fetching
-    const { responseData, error,setIsLoading, isLoading, getPracticeTestDetails } = usePracticeTestDetails();
-
+    const { responseData, error, setIsLoading, isLoading, getPracticeTestDetails } = usePracticeTestDetails();
+    const { serachResult, getSearch, serachLoading } = useGetSearch()
     const { CurrentTheme } = useCheckTheme()
 
-    
+
     useFocusEffect(
         useCallback(() => {
             const fetchTestDetails = async () => {
@@ -23,23 +26,42 @@ const PracticeSection = () => {
             };
             fetchTestDetails();
 
-            return ()=> {setDataFetched(null)}
+            return () => { setDataFetched(null) }
         }, [])
     );
 
 
 
-    useEffect(()=>{
-        if(!isLoading){
+    useEffect(() => {
+        if (!isLoading) {
             setDataFetched(responseData)
         }
-    },[isLoading])
+    }, [isLoading])
 
+
+    useEffect(()=>{
+        if(!serachLoading){
+            if(searchQuery==''){
+                getPracticeTestDetails()
+            }
+            else{
+                setDataFetched(serachResult)
+            }
+        }
+    },[serachLoading])
 
 
     const handleFilterToggle = () => {
         setFilterToggle(!filterToggle)
     }
+
+    const debouncedSearch = debounce(getSearch, 300);
+    // Handler for input change
+    const handleInputChange = (text) => {
+        setSearchQuery(text);
+        // Invoke the debounced search function
+        debouncedSearch(text);
+    };
 
     return (
         <>
@@ -49,6 +71,8 @@ const PracticeSection = () => {
                         <Ionicons name="search-outline" size={24} color="black" style={styles.searchIcon} />
                         <TextInput
                             style={styles.textInput}
+                            onChangeText={handleInputChange}
+                            value={searchQuery}
                             placeholder='Search the Topic'
                         />
                     </View>
@@ -67,7 +91,7 @@ const PracticeSection = () => {
                         )}
                 </View>
             </View>
-            <ModalFilter visibility={filterToggle} OnClose={(toggle) => setFilterToggle(toggle)} setFilteredData={(data)=>setDataFetched(data)} setIsLoading={(data)=>setIsLoading(data)} clear={()=>getPracticeTestDetails()}/>
+            <ModalFilter visibility={filterToggle} OnClose={(toggle) => setFilterToggle(toggle)} setFilteredData={(data) => setDataFetched(data)} setIsLoading={(data) => setIsLoading(data)} clear={() => getPracticeTestDetails()} />
         </>
     )
 }

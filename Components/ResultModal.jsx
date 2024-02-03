@@ -22,7 +22,7 @@ const ResultModal = ({ visibility, resultData ,OnClose}) => {
                                             },
                                         ]}
                                         key={optionIndex}>
-                                        <Text style={styles.optionText}>{option.text}</Text>
+                                        <Text style={[styles.optionText,{color: option.isSelected ? '#fff':'#333'}]}>{option.text}</Text>
                                     </View>
                                 ))}
                             </View>
@@ -60,6 +60,5 @@ const styles = StyleSheet.create({
     optionText: {
         fontSize: 16,
         fontWeight: '400',
-        color: '#333',
     },
 })

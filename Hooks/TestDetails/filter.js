@@ -6,7 +6,7 @@ const useFilter = ()=>{
     const getFilterData = async(difficulty,sortby,subtopic)=>{
         try {
             setIsLoading(true)
-            let apiUrl = `http://192.168.0.104:5000/api/filter?${difficulty && `difficulty=${difficulty}`}&${sortby && `sortby=${sortby}`}&${subtopic && `subtopic=${subtopic}`}`
+            let apiUrl = `https://ace-aptitude-v1.onrender.com/api/filter?${difficulty && `difficulty=${difficulty}`}&${sortby && `sortby=${sortby}`}&${subtopic && `subtopic=${subtopic}`}`
             const response = await fetch(apiUrl)
 
             if(response.ok){

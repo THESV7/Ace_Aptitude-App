@@ -4,7 +4,7 @@
     "slug": "Ace_Aptitude",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/adaptive-icon-1.png",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/adaptive-icon-1.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.sahilwagh142.Ace_Aptitude"
