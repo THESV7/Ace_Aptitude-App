@@ -28,6 +28,8 @@ import VerifyOtpScreen from './Screen/VerifyOtpScreen'
 import StartTestScreen from './Screen/StartTestScreen'
 import QuesionsScreen from './Screen/QuesionsScreen'
 import ScoreScreen from './Screen/ScoreScreen'
+import ForgetScreen from './Screen/ForgetScreen'
+import PasswordReset from './Screen/PasswordReset'
 const App = () => {
   return (
     <>
@@ -38,6 +40,8 @@ const App = () => {
           <Stack.Screen name='SignUp' component={SignUpScreen} />
           <Stack.Screen name='OtpVerify' component={VerifyOtpScreen} />
           <Stack.Screen name='SignIn' component={SignInScreen} />
+          <Stack.Screen name='forgetPassword' component={ForgetScreen}/>
+          <Stack.Screen name='passwordReset' component={PasswordReset}/>
           <Stack.Screen name='Tabs' component={TabNavigator} />
           <Stack.Screen name='Start Test' component={StartTestScreen} />
           <Stack.Screen name='Question Solving' component={QuesionsScreen} />
