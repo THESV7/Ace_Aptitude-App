@@ -3,7 +3,7 @@ import React from 'react'
 
 const StatsCard = ({ imageSource, title, subtitle }) => {
     return (
-        <View style={[styles.card, { width: 170 }]}>
+        <View style={[styles.card, { width: 160 ,minWidth:150}]}>
             <Image
                 source={imageSource}
                 style={{ width: 40, height: 40 }}
