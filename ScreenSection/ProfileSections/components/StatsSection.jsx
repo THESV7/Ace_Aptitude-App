@@ -32,7 +32,7 @@ const StatsSection = () => {
       <View style={{ flex: 0 }}>
         <Text style={{ fontSize: 20, fontWeight: '700' }}>Stats</Text>
       </View>
-      <View style={{ flex: 1, flexDirection: 'row', gap: 10, flexWrap: 'wrap' }}>
+      <View style={{ flex: 1, flexDirection: 'row', gap: 10, flexWrap: 'wrap',justifyContent:'space-evenly'}}>
         {cardData.map((data, index) => (
           <StatsCard
             key={index}

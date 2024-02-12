@@ -30,6 +30,7 @@ import QuesionsScreen from './Screen/QuesionsScreen'
 import ScoreScreen from './Screen/ScoreScreen'
 import ForgetScreen from './Screen/ForgetScreen'
 import PasswordReset from './Screen/PasswordReset'
+import ToastManager from 'toastify-react-native'
 const App = () => {
   return (
     <>
@@ -40,8 +41,8 @@ const App = () => {
           <Stack.Screen name='SignUp' component={SignUpScreen} />
           <Stack.Screen name='OtpVerify' component={VerifyOtpScreen} />
           <Stack.Screen name='SignIn' component={SignInScreen} />
-          <Stack.Screen name='forgetPassword' component={ForgetScreen}/>
-          <Stack.Screen name='passwordReset' component={PasswordReset}/>
+          <Stack.Screen name='forgetPassword' component={ForgetScreen} />
+          <Stack.Screen name='passwordReset' component={PasswordReset} />
           <Stack.Screen name='Tabs' component={TabNavigator} />
           <Stack.Screen name='Start Test' component={StartTestScreen} />
           <Stack.Screen name='Question Solving' component={QuesionsScreen} />
@@ -54,6 +55,7 @@ const App = () => {
           <Stack.Screen name='Report' component={ReportProblemScreen} />
         </Stack.Navigator>
       </NavigationContainer>
+      <ToastManager />
     </>
   )
 }
@@ -67,18 +69,18 @@ const TabNavigator = () => {
           tabBarLabelStyle: {
             textAlign: 'center',
             fontSize: 14,
-            marginBottom:10,
+            marginBottom: 10,
           },
           tabBarStyle: {
             height: 70,
-            elevation:4,
+            elevation: 4,
             // borderTopRightRadius:40,
             // borderTopLeftRadius:40,
             // position:'absolute'
           },
           tabBarHideOnKeyboard: true,
-          tabBarInactiveTintColor:'#C4C4C4',
-          tabBarActiveTintColor:'#6674CC',
+          tabBarInactiveTintColor: '#C4C4C4',
+          tabBarActiveTintColor: '#6674CC',
         }}>
         <Tab.Screen name='Home' component={HomeScreen}
           options={{

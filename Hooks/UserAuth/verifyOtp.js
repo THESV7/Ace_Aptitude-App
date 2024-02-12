@@ -4,7 +4,7 @@ const useVerifyOtp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-
+  const [message,setMessage]=useState('')
   const verifyOtp = async (email, otp , purpose) => {
     setLoading(true);
     setError(null);
@@ -22,6 +22,7 @@ const useVerifyOtp = () => {
 
       if (response.ok) {
         setSuccess(true);
+        setMessage(data.message)
       } else {
         setError(data.message || 'Failed to verify OTP');
       }
@@ -38,7 +39,7 @@ const useVerifyOtp = () => {
     setSuccess(false);
   }
 
-  return { loading, error, success, verifyOtp ,clear};
+  return { loading, error,messageVerification : message, success, verifyOtp ,clear};
 };
 
 export default useVerifyOtp;

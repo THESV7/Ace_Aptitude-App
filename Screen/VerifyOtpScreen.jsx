@@ -6,17 +6,21 @@ import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/nativ
 import useVerifyOtp from '../Hooks/UserAuth/verifyOtp';
 import SuccessfulModal from '../Components/SuccessfulModal';
 import useResendOTP from '../Hooks/UserAuth/resendOtp';
+import { Toast } from 'toastify-react-native';
+import showToast from '../Hooks/Utiles/showToast';
+import CustomToast from '../Components/Toast';
 
 const VerifyOtpScreen = () => {
   const route = useRoute();
   const { email, purpose } = route.params;
   const [otp, setOtp] = useState(['', '', '', '']);
+  const [toastVisible, setToastVisible] = useState({ visible: false, message: '', type: '' });
   const [isVisible, setIsVisible] = useState(false);
   const [resendDisabled, setResendDisabled] = useState(false);
-  const [timer, setTimer] = useState(60); // Initial timer value
+  const [timer, setTimer] = useState(5); // Initial timer value
   const inputRefs = useRef([...Array(4)].map(() => React.createRef()));
   const navigation = useNavigation();
-  const { loading, error, success, verifyOtp, clear } = useVerifyOtp();
+  const { loading, error, messageVerification, success, verifyOtp, clear } = useVerifyOtp();
   const { loading: resendLoading, error: resendError, message, resendOTP } = useResendOTP(); // Use the useResendOTP hook
 
 
@@ -37,10 +41,14 @@ const VerifyOtpScreen = () => {
     }
   }, [timer]);
 
+
   useFocusEffect(
     useCallback(() => {
-      if (!loading && success && purpose) {
-        navigation.navigate('passwordReset', { email });
+      if (!loading && success && purpose && messageVerification) {
+        setToastVisible({ visible: true, message:messageVerification, type: 'success' })
+        setTimeout(() => {
+          navigation.navigate('passwordReset', { email });
+        }, 3400)
       } else if (!loading && success && !purpose) {
         setIsVisible(true);
       }
@@ -52,6 +60,14 @@ const VerifyOtpScreen = () => {
     }, [loading, success])
   );
 
+  useEffect(() => {
+    if (!loading && error) {
+      setToastVisible({ visible: true, message: error, type: 'error' })
+      inputRefs.current[0].focus();
+    }
+  }, [loading,error])
+
+
   const focusNextInput = (index) => {
     if (index < inputRefs.current.length - 1) {
       inputRefs.current[index + 1].focus();
@@ -60,21 +76,33 @@ const VerifyOtpScreen = () => {
 
   const handleVerify = () => {
     const enteredOtp = otp.join('');
-    verifyOtp(email, enteredOtp, purpose);
+    if (!enteredOtp.trim()) {
+      setToastVisible({ visible: true, message: 'Enter OTP', type: 'error' })
+    }
+    else {
+      verifyOtp(email, enteredOtp, purpose);
+    }
   };
 
   const handleResendOtp = () => {
     // You might trigger the resend OTP logic here
     setResendDisabled(true);
     setTimer(60); // Reset timer
+    setToastVisible({ visible: true, message: 'OTP sent', type: 'success' })
     setTimeout(() => {
       setResendDisabled(false);
     }, 60000);
     resendOTP(email)
   };
 
+
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      {
+        toastVisible && (!loading || !resendLoading) &&
+        <CustomToast showToast={toastVisible.visible} message={toastVisible.message} type={toastVisible.type} setToastVisible={(data) => setToastVisible({ visible: data })} />
+      }
       <View style={{ flex: 1 }}>
         <View style={{ padding: 20 }}>
           <BackButton route={'SignUp'} />
