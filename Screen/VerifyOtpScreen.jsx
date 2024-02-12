@@ -44,11 +44,11 @@ const VerifyOtpScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      if (!loading && success && purpose && messageVerification) {
-        setToastVisible({ visible: true, message:messageVerification, type: 'success' })
+      if (!loading && success && purpose) {
+        setToastVisible({ visible: true, message:'OTP Verified', type: 'success' })
         setTimeout(() => {
           navigation.navigate('passwordReset', { email });
-        }, 3400)
+        }, 2000)
       } else if (!loading && success && !purpose) {
         setIsVisible(true);
       }
