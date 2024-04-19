@@ -85,6 +85,7 @@ const QuesionsScreen = () => {
             return `${seconds} s`;
         }
     };
+    
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f7f8fa' }}>
             <ScrollView style={{ flexGrow: 1 }}>

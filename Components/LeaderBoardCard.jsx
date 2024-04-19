@@ -19,7 +19,7 @@ const LeaderBoardCard = ({ cardDetails, position }) => {
                     source={{ uri: cardDetails.profileImage }} // Replace with your image path
                     style={[styles.profileImage,{ borderColor }]}
                 />
-                <Text style={{ fontSize: 18, fontWeight: '600' }}>{cardDetails.name.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ')}</Text>
+                <Text style={{ fontSize: 18, fontWeight: '600' }}>{cardDetails?.name?.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ')}</Text>
             </View>
             <View style={{ flex: 0, flexDirection: 'row', alignItems: 'center', gap: 8 }}>
                 <Image source={require('../assets/coinThender.png')} />

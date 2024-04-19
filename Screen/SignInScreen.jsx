@@ -4,8 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import useUserLogin from '../Hooks/UserAuth/userLogin';
 import useCustomNavigation from '../Hooks/Navigation/Navigate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Feather } from '@expo/vector-icons';
-import PasswordVisibilityToggle from '../Components/PasswordVisibilityToggle';
+import GoogleLoginButton from '../Components/Google Auth/GoogleLoginButton';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
@@ -77,6 +76,7 @@ const SignInScreen = () => {
             <Text style={styles.paragraphText}>Don't have an account? <Text onPress={() => navigate('SignUp')} style={{ color: '#6674CC' }}>Sign Up</Text></Text>
           </View>
         </View>
+        {/* <GoogleLoginButton/> */}
       </View>
     </SafeAreaView>
   )

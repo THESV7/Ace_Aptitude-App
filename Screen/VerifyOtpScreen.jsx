@@ -17,7 +17,7 @@ const VerifyOtpScreen = () => {
   const [toastVisible, setToastVisible] = useState({ visible: false, message: '', type: '' });
   const [isVisible, setIsVisible] = useState(false);
   const [resendDisabled, setResendDisabled] = useState(false);
-  const [timer, setTimer] = useState(5); // Initial timer value
+  const [timer, setTimer] = useState(60); // Initial timer value
   const inputRefs = useRef([...Array(4)].map(() => React.createRef()));
   const navigation = useNavigation();
   const { loading, error, messageVerification, success, verifyOtp, clear } = useVerifyOtp();

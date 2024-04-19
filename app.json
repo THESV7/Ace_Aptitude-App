@@ -3,6 +3,7 @@
     "name": "Ace_Aptitude",
     "slug": "Ace_Aptitude",
     "version": "1.1.0",
+    "scheme":"googleauth",
     "orientation": "portrait",
     "icon": "./assets/adaptive-icon-1.png",
     "userInterfaceStyle": "automatic",

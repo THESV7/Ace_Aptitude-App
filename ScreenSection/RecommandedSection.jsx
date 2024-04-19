@@ -10,16 +10,16 @@ const RecommandedSection = ({ isLoading }) => {
 
   const recommdedData = [
     {
-      categoryName: 'Adventure',
-      description: 'Embark on thrilling quests and discover new worlds full of excitement.',
-      icon: Category3,
-      bgColor: '#7b78fc',
-    },
-    {
       categoryName: 'Coding Odyssey',
       description: 'Unleash your coding prowess and craft innovative solutions.',
       icon: Category2,
       bgColor: '#4285fa',
+    },
+    {
+      categoryName: 'Adventure',
+      description: 'Embark on thrilling quests and discover new worlds full of excitement.',
+      icon: Category3,
+      bgColor: '#7b78fc',
     },
     {
       categoryName: 'Language Voyage',

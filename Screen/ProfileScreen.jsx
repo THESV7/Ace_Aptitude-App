@@ -124,30 +124,30 @@ const ProfileScreen = () => {
                   <View>
                     {
                       isUserLoading ?
-                        <TextSkeleton width={200} mb={10}/>
+                        <TextSkeleton width={200} mb={10} />
                         :
-                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4 ,justifyContent:'center'}}>
+                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4, justifyContent: 'center' }}>
                           <Text style={styles.name}>{userDetailsData?.Name}</Text>
                           <Text style={{ marginTop: 8 }}>{userDetailsData?.isVerified && <MaterialIcons name="verified" size={24} color="#6674cc" />}</Text>
                         </View>
                     }
                     {
                       isUserLoading ?
-                        <View style={{alignItems:'center',justifyContent:'center',}}>
-                          <TextSkeleton width={150}/>
+                        <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                          <TextSkeleton width={150} />
                         </View>
                         :
                         <Text style={styles.email}>{userDetailsData?.email}</Text>
                     }
 
                   </View>
-                  {isUserLoading ?
+                  {/* {isUserLoading ?
                     <TextSkeleton width={120} height={50} />
                     : (
                       <TouchableOpacity style={styles.editButton} onPress={() => navigate('Edit Profile')}>
                         <Text style={styles.editText}>Edit Profile</Text>
                       </TouchableOpacity>
-                    )}
+                    )} */}
                 </View>
                 <View>
                   <StatsSection />
@@ -169,6 +169,7 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom:'20%' 
   },
   gradient: {
     flex: 1,
