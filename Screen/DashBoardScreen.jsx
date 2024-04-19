@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import BezierLineChartSection from '../ScreenSection/DashboardSections/BezierLineChartSection'
 import BackButton from '../Components/BackButton'
 import PieChatSection from '../ScreenSection/DashboardSections/PieChatSection'
+
 const DashBoardScreen = () => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f7f8fa' }}>
@@ -17,7 +18,7 @@ const DashBoardScreen = () => {
                             <Text style={{ fontSize: 24, fontWeight: "700" }}>Dashboard</Text>
                         </View>
                     </View>
-                    <View style={{flex:1,gap:25}}>
+                    <View style={{ flex: 1, gap: 25 }}>
                         <View style={{ paddingHorizontal: 20 }}>
                             <BezierLineChartSection />
                         </View>

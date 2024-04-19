@@ -19,7 +19,7 @@ const Banner = ({ isLoading }) => {
             </View>
             <TextInput
               style={{ paddingHorizontal: 20, paddingVertical: 15, backgroundColor: 'white', borderRadius: 50, elevation: 4, fontSize: 16, fontWeight: '700' }}
-              placeholder='Test your Aptitude'
+              placeholder='Search Roadmap'
             />
           </View>
       }

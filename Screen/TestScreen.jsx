@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   MainContainer: {
-    flex: 1
+    flex: 1,
+    paddingBottom:'20%'
   },
   header: {
     flex: 1

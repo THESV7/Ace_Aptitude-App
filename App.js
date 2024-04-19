@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -13,10 +13,7 @@ import SignInScreen from './Screen/SignInScreen'
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
 
-import { Foundation } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Foundation, Ionicons, MaterialCommunityIcons, Entypo, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import OnboardingScreen from './Screen/OnboardingScreen'
 import DashBoardScreen from './Screen/DashBoardScreen'
 import SettingsScreen from './Screen/SettingsScreen'
@@ -31,6 +28,7 @@ import ScoreScreen from './Screen/ScoreScreen'
 import ForgetScreen from './Screen/ForgetScreen'
 import PasswordReset from './Screen/PasswordReset'
 import ToastManager from 'toastify-react-native'
+import RoadMapScreen from './Screen/RoadMapScreen/RoadMapScreen'
 const App = () => {
   return (
     <>
@@ -43,7 +41,7 @@ const App = () => {
           <Stack.Screen name='SignIn' component={SignInScreen} />
           <Stack.Screen name='forgetPassword' component={ForgetScreen} />
           <Stack.Screen name='passwordReset' component={PasswordReset} />
-          <Stack.Screen name='Tabs' component={TabNavigator} />
+          <Stack.Screen name='Tabs' component={TabNavigator}/>
           <Stack.Screen name='Start Test' component={StartTestScreen} />
           <Stack.Screen name='Question Solving' component={QuesionsScreen} />
           <Stack.Screen name='Score' component={ScoreScreen} />
@@ -60,6 +58,33 @@ const App = () => {
   )
 }
 
+
+const CustomRoadMapButton = ({ onPress }) => {
+  return (
+    <TouchableOpacity
+      style={{
+        bottom: '10%',
+        // right:'5%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 5,
+      }}
+      onPress={onPress}>
+      <View
+        style={{
+          width: 60,
+          height: 60,
+          borderRadius: 35,
+          backgroundColor: '#6674cc',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+      <FontAwesome5 name="sitemap" size={26} color="white" />
+      </View>
+    </TouchableOpacity>
+  )
+}
 const TabNavigator = () => {
   return (
     <>
@@ -74,13 +99,18 @@ const TabNavigator = () => {
           tabBarStyle: {
             height: 70,
             elevation: 4,
+            paddingVertical: 10,
             // borderTopRightRadius:40,
             // borderTopLeftRadius:40,
-            // position:'absolute'
+            borderRadius: 20,
+            position: 'absolute',
+            marginHorizontal: 4,
+            bottom: 10,
           },
           tabBarHideOnKeyboard: true,
           tabBarInactiveTintColor: '#C4C4C4',
           tabBarActiveTintColor: '#6674CC',
+          
         }}>
         <Tab.Screen name='Home' component={HomeScreen}
           options={{
@@ -97,6 +127,17 @@ const TabNavigator = () => {
                 <View><Entypo name="new-message" size={24} color={focused ? '#6674CC' : '#C4C4C4'} /></View>
               )
             }
+          }} />
+        <Tab.Screen name='RoadMap' component={RoadMapScreen}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <></>
+              )
+            },
+            tabBarButton: (props) => (
+              <CustomRoadMapButton {...props} />
+            )
           }} />
         <Tab.Screen name='LeaderBoard' component={LeaderboardScreen}
           options={{
