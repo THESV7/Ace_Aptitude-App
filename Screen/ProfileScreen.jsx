@@ -86,7 +86,6 @@ const ProfileScreen = () => {
   //   }
   // };
 
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar style="auto" />
@@ -150,7 +149,7 @@ const ProfileScreen = () => {
                     )} */}
                 </View>
                 <View>
-                  <StatsSection />
+                  <StatsSection userDetailsData={userDetailsData}/>
                 </View>
                 <View>
                   <BadgeSection />

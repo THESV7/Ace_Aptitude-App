@@ -2,12 +2,12 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import StatsCard from './StatsCard';
 
-const StatsSection = () => {
+const StatsSection = ({userDetailsData}) => {
 
   const cardData = [
     {
       imageSource: require('../../../assets/Accuracy.png'),
-      title: '53',
+      title: userDetailsData?.numofTests,
       subtitle: 'Tests Taken',
     },
     {
@@ -17,7 +17,7 @@ const StatsSection = () => {
     },
     {
       imageSource: require('../../../assets/coinThender.png'),
-      title: '7',
+      title: userDetailsData?.coins,
       subtitle: 'Coins',
     },
     {

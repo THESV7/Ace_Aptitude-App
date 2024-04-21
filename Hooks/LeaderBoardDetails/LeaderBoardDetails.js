@@ -8,7 +8,7 @@ const useLeaderBoardDetails = () => {
     const getLeaderBoardDetails = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/leaderboard`);
+            const response = await fetch(`http://192.168.0.104:5000/api/leaderboard`);
 
             if (!response.ok) {
                 throw new Error('User already registered');

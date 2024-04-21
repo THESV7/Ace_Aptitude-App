@@ -9,7 +9,7 @@ const useUserLogin = () => {
     const userLogin = async (email,password) => {
         setIsLoading(true)
         try {
-            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/login`, {
+            const response = await fetch(`http://192.168.0.104:5000/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

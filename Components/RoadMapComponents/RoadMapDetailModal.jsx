@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; // Importing the icon
 
-const RoadMapDetailModal = ({ visibility, OnClose, modelData }) => {
+const RoadMapDetailModal = ({ visibility, OnClose, modelData ,setVisibilty}) => {
     const { exam, description, subjects, resources } = modelData;
     const [expandedSubjects, setExpandedSubjects] = useState([]);
 

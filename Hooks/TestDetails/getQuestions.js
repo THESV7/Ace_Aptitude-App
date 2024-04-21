@@ -9,10 +9,10 @@ const useGetQuetions = ()=>{
             setIsLoading(true)
             let apiUrl = ''
             if(testType==='Mock'){
-                apiUrl=`https://ace-aptitude-v1.onrender.com/api/getRandomQuestions/${NoOfQuestions}/${category}`
+                apiUrl=`http://192.168.0.104:5000/api/getRandomQuestions/${NoOfQuestions}/${category}`
             }
             else{
-                apiUrl=`https://ace-aptitude-v1.onrender.com/api/practiceQuetions/${category}/${difficulty}`
+                apiUrl=`http://192.168.0.104:5000/api/practiceQuetions/${category}/${difficulty}`
             }
             const response = await fetch(apiUrl)
 

@@ -13,7 +13,7 @@ const useGetNotification = ()=>{
         const userId = userDetails._id
         try {
             //DON'T Change by base Url
-            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/notifications/${userId}`)
+            const response = await fetch(`http://192.168.0.104:5000/api/notifications/${userId}`)
             if(response.ok){
                 const data = await response.json()
                 setResponse(data.data.notifications)

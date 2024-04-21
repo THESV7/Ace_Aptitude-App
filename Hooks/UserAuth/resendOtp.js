@@ -11,7 +11,7 @@ const useResendOTP = () => {
     setMessage(null);
 
     try {
-      const response = await fetch('https://ace-aptitude-v1.onrender.com/api/resend-otp', {
+      const response = await fetch('http://192.168.0.104:5000/api/resend-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

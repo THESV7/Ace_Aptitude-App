@@ -8,7 +8,7 @@
         "buildType": "apk"
       },
       "env":{
-        "EXPO_PUBLIC_API_URL":"https://ace-aptitude-v1.onrender.com/api",
+        "EXPO_PUBLIC_API_URL":"http://192.168.0.104:5000/api",
         "EXPO_PUBLIC_CLOUD_NAME":"dmrjruik5",
         "EXPO_PUBLIC_API_KEY":"537622161437147",
         "EXPO_PUBLIC_API_SECRET":"pYnAsthvi-kY5FpXWzO3PTnNl-A"
