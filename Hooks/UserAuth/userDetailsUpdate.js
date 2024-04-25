@@ -14,7 +14,7 @@ const useUpdateUserDetails = ()=>{
         try {
             // console.log(BASE_URL)
             // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint for user registration
-            const response = await fetch(`http://192.168.0.104:5000/api/editProfile`, {
+            const response = await fetch(`https://ace-aptitude-new.onrender.com/api/editProfile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

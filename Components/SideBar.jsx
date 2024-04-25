@@ -75,14 +75,14 @@ const SideBar = ({ toggle, onClose, userDetails }) => {
           ]}
         >
           <View style={{ flex: 1, gap: 4, paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: '#ddd', }}>
-            <View style={{ paddingBottom: 10 }}>
+            <View style={{ paddingBottom: 10, display:'flex' , flexDirection:'row',gap:10 ,alignItems:'center' }}>
               <TouchableWithoutFeedback onPress={() => navigate('Profile')}>
                 <View style={{}}>
-                  <Image source={{ uri: userDetails?.profileImage }} style={{ width: 80, height: 80, borderRadius: 100 }} />
+                  <Image source={{ uri: userDetails?.profileImage }} style={{ width: 50, height: 50, borderRadius: 100 }} />
                 </View>
               </TouchableWithoutFeedback>
               <View>
-                <Text style={{ fontSize: 20, fontWeight: '700', color: '#152946', textTransform: 'capitalize' }}>{userDetails?.Name || 'Guest'}</Text>
+                <Text style={{ fontSize: 18, fontWeight: '700', color: '#152946', textTransform: 'capitalize' }}>{userDetails?.Name || 'Guest'}</Text>
                 <Text style={{ fontSize: 14, fontWeight: '700', color: '#ccc' }} onPress={() => navigate('Profile')}>View profile</Text>
               </View>
             </View>

@@ -20,7 +20,7 @@ const useFilter = () => {
             queryParams.push(`subtopic=${encodeURIComponent(subtopic)}`);
         }
 
-        const apiUrl = `http://192.168.0.104:5000/api/filter?${queryParams.join("&")}`;
+        const apiUrl = `https://ace-aptitude-new.onrender.com/api/filter?${queryParams.join("&")}`;
 
         try {
             const response = await fetch(apiUrl);

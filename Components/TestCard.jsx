@@ -1,11 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const TestCard = ({ testData }) => {
 
   const navigation = useNavigation()
-  const { category, subtopic = "", difficulty } = testData
+  const [categoryConverted , setCategoryConverted]=useState('')
+  const { category, subtopic = "", difficulty } = testData;
   const difficultyColor = (data) => {
     switch (data) {
       case 'easy':
@@ -26,13 +27,27 @@ const TestCard = ({ testData }) => {
     return text.toLowerCase().split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   };
 
+  const categoryConverter=()=>{
+    if(category==='Verbal'){
+      setCategoryConverted('verbal');
+    }
+    else if(category==='Logical Reasoning'){
+      setCategoryConverted('logical_reasoning')
+    }
+    else{
+      setCategoryConverted(category)
+    }
+  } 
 
+  useEffect(()=>{
+    categoryConverter()
+  },[])
 
   return (
     <>
       <TouchableOpacity
         style={styles.card}
-        onPress={() => navigation.navigate('Start Test', { category: category, difficulty: difficulty, time: 20, })}
+        onPress={() => navigation.navigate('Start Test', { category: categoryConverted, difficulty: difficulty, time: 20, })}
       >
         <View style={styles.categoryContainer}>
           <Text style={styles.title}>{category}</Text>

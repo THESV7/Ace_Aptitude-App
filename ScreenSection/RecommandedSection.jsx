@@ -11,7 +11,7 @@ const RecommandedSection = ({ isLoading }) => {
   const recommdedData = [
     {
       categoryName: 'Coding Odyssey',
-      description: 'Unleash your coding prowess and craft innovative solutions.',
+      description: 'Unleash your coding powers and craft innovative solutions.',
       icon: Category2,
       bgColor: '#4285fa',
     },

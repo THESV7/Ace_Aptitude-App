@@ -1,8 +1,8 @@
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, BackHandler, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CustomHeader from '../Components/CustomeHeader/CustomHeader'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { CommonActions, useNavigation, useRoute } from '@react-navigation/native'
 import Header from '../Components/Header'
 import QuestionNoListModal from '../Components/QuestionNoListModal'
 import QuestionNoSelector from '../Components/QuestionNoSelector'
@@ -20,15 +20,61 @@ const QuesionsScreen = () => {
     };
 
 
+
+
     const renderItem = ({ item, index }) => (
-        <QuestionNoSelector item={item} key={item.id} index={index} navigateToQuestion={navigateToQuestion} isMarked={markedQuestions}/>
+        <QuestionNoSelector item={item} key={item.id} index={index} navigateToQuestion={navigateToQuestion} isMarked={markedQuestions} />
     );
 
     const route = useRoute()
     const { category, time, NoOfQuestions, difficulty } = route.params
     const [isModalOpen, setIsModalOpen] = useState(false)
     const { getQuetions, isQuestionsLoading, error, responseData } = useGetQuetions()
+
+
     useEffect(() => {
+        // Override the back button behavior
+        const backAction = () => {
+            Alert.alert(
+                'Exit Test',
+                'Do you want to exit test?',
+                [
+                    {
+                        text: 'Cancel',
+                        onPress: () => console.log('Cancel Pressed'),
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            navigation.dispatch(
+                                CommonActions.reset({
+                                    index: 0,
+                                    routes: [
+                                        { name: 'Home' }, // Replace with the appropriate route name
+                                    ],
+                                })
+                            );
+                        }, // Exit the app
+                    },
+                ],
+                { cancelable: false } // Prevents dismissal by tapping outside the alert
+            );
+            return true; // Prevents default back button behavior
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            'hardwareBackPress',
+            backAction
+        );
+
+        return () => {
+            // Clean up the back button listener on component unmount
+            backHandler.remove();
+        };
+    }, []);
+    useEffect(() => {
+
         if (category && NoOfQuestions) {
             getQuetions(category, NoOfQuestions, 'Mock')
         }
@@ -85,7 +131,7 @@ const QuesionsScreen = () => {
             return `${seconds} s`;
         }
     };
-    
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f7f8fa' }}>
             <ScrollView style={{ flexGrow: 1 }}>
@@ -138,7 +184,7 @@ const QuesionsScreen = () => {
             </ScrollView>
             {
                 isModalOpen &&
-                <QuestionNoListModal visibility={isModalOpen} onClose={(toggle) => setIsModalOpen(toggle)} listData={responseData} navigateToQuestion={navigateToQuestion}  isMarked={markedQuestions}/>
+                <QuestionNoListModal visibility={isModalOpen} onClose={(toggle) => setIsModalOpen(toggle)} listData={responseData} navigateToQuestion={navigateToQuestion} isMarked={markedQuestions} />
             }
         </SafeAreaView>
     )

@@ -10,7 +10,7 @@ const usePracticeTestDetails = () => {
     const getPracticeTestDetails = async () => {
         setIsLoading(true)
         try {
-            const resposnse = await fetch(`http://192.168.0.104:5000/api/Allcategory`)
+            const resposnse = await fetch(`https://ace-aptitude-new.onrender.com/api/Allcategory`)
             if (!resposnse.ok) {
                 throw new Error('Details not fetched');
             }

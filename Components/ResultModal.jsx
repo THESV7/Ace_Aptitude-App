@@ -18,7 +18,7 @@ const ResultModal = ({ visibility, resultData ,OnClose}) => {
                                             styles.optionButton,
                                             {
                                                 backgroundColor:
-                                                    option.isCorrect ? 'green': !option.isSelected  ? 'transparent' : 'red',
+                                                    option.isCorrect ? '#7bff33': !option.isSelected  ? 'transparent' : '#ff0000',
                                             },
                                         ]}
                                         key={optionIndex}>

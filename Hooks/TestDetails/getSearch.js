@@ -8,7 +8,7 @@ const useGetSearch = ()=>{
         try {
             //DON'T Change by base Url
             if(topic!== ''){
-                const response = await fetch(`http://192.168.0.104:5000/api/search/${topic}`)
+                const response = await fetch(`https://ace-aptitude-new.onrender.com/api/search/${topic}`)
                 if(response.ok){
                     const data = await response.json()
                     setResponse(data)
