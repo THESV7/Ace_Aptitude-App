@@ -17,11 +17,11 @@ const ConfirmModal = ({ visibility, onClose }) => {
                     <Text style={styles.modalText}>Confirm Clear Cache</Text>
                     <Text style={styles.paragraphText}>This action will clear the storage and reset the app data.</Text>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={[styles.clearButton, styles.modalButton]} onPress={handleClear}>
-                            <Text style={styles.modalButtonText}>Clear</Text>
-                        </TouchableOpacity>
                         <TouchableOpacity style={[styles.cancelButton, styles.modalButton]} onPress={onClose}>
                             <Text style={styles.modalButtonText}>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.clearButton, styles.modalButton]} onPress={handleClear}>
+                            <Text style={styles.modalButtonText}>Clear</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

@@ -98,7 +98,7 @@ const VerifyOtpScreen = () => {
 
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+    <SafeAreaView style={{ flex: 1}}>
       {
         toastVisible && (!loading || !resendLoading) &&
         <CustomToast showToast={toastVisible.visible} message={toastVisible.message} type={toastVisible.type} setToastVisible={(data) => setToastVisible({ visible: data })} />
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     height: 60,
     borderWidth: 2,
     borderColor: '#6674cc',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#e1e4fb',
     borderRadius: 10,
     padding: 10,
     textAlign: 'center',

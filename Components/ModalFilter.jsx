@@ -4,17 +4,17 @@ import BackButton from '../Components/BackButton'
 import CheckBox from './CheckBox'
 import SubTopicSelection from './SubTopicSelection'
 import useFilter from '../Hooks/TestDetails/filter'
-const ModalFilter = ({ visibility, OnClose ,setFilteredData ,setIsLoading , clear}) => {
+const ModalFilter = ({ visibility, OnClose, setFilteredData, setIsLoading, clear }) => {
 
 
-    const { getFilterData , isLoading ,responseData } = useFilter()
+    const { getFilterData, isLoading, responseData } = useFilter()
 
-    useEffect(()=>{
-        if(!isLoading){
+    useEffect(() => {
+        if (!isLoading) {
             setFilteredData(responseData)
             setIsLoading(isLoading)
         }
-    },[isLoading])
+    }, [isLoading])
 
     const Difficulty = ['Easy', 'Medium', 'Hard',]
 
@@ -85,8 +85,18 @@ const ModalFilter = ({ visibility, OnClose ,setFilteredData ,setIsLoading , clea
 
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
     const [sortBy, setSortBy] = useState('')
+    const [selectedSubtopic, setSelectedSubtopic] = useState('');
+
     const handleCheckBoxChange = (selected) => {
         setSelectedDifficulty(selected);
+    };
+
+    const handleSubtopicSelection = (subtopic) => {
+        if (selectedSubtopic === subtopic) {
+            setSelectedSubtopic(''); // Deselect if the same subtopic is clicked again
+        } else {
+            setSelectedSubtopic(subtopic); // Select the clicked subtopic
+        }
     };
 
     const handleSortByCheckBox = (selected) => {
@@ -94,8 +104,8 @@ const ModalFilter = ({ visibility, OnClose ,setFilteredData ,setIsLoading , clea
     }
 
     const handleApply = async () => {
-        if (selectedDifficulty !== '' || sortBy !== '') {
-            getFilterData(selectedDifficulty.toLocaleLowerCase(), sortBy)
+        if (selectedDifficulty !== '' || sortBy !== '' || selectedSubtopic !== '') {
+            getFilterData(selectedDifficulty.toLocaleLowerCase(), sortBy , selectedSubtopic)
         }
         OnClose(false);
     };
@@ -113,7 +123,7 @@ const ModalFilter = ({ visibility, OnClose ,setFilteredData ,setIsLoading , clea
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <View style={{ flex: 1 }}>
-                            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 30 ,marginBottom:20}}>
+                            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 30, marginBottom: 20 }}>
                                 <View style={{ flex: 1 }}>
                                     <BackButton OnClose={OnClose} />
                                 </View>
@@ -154,7 +164,12 @@ const ModalFilter = ({ visibility, OnClose ,setFilteredData ,setIsLoading , clea
                             </View>
                             {
                                 topicsWithSubtopics.map((data) => (
-                                    <SubTopicSelection topicsWithSubtopics={data} key={data.topic} />
+                                    <SubTopicSelection
+                                        topicsWithSubtopics={data}
+                                        onSelect={handleSubtopicSelection}
+                                        selectedSubtopic={selectedSubtopic}
+                                        key={data.topic} 
+                                    />
                                 ))
                             }
                         </View>

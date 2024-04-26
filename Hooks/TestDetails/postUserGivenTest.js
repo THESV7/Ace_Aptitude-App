@@ -21,7 +21,7 @@ const usePostUserTest = () => {
         }
         setIsLoading(true)
         try {
-            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/tests`, {
+            const response = await fetch(`https://ace-aptitude-new.onrender.com/api/tests`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

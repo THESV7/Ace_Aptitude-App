@@ -63,7 +63,7 @@ const OnboardingScreen = () => {
                 }} />
               </View>
             ),
-            title: 'Unlock Your Potential"',
+            title: 'Unlock Your Potential',
             subtitle: 'Master Aptitude for Success',
             titleStyles: {
               fontSize: 30,

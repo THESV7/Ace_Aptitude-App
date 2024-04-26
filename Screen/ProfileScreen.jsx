@@ -86,7 +86,6 @@ const ProfileScreen = () => {
   //   }
   // };
 
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar style="auto" />
@@ -141,16 +140,16 @@ const ProfileScreen = () => {
                     }
 
                   </View>
-                  {/* {isUserLoading ?
+                  {isUserLoading ?
                     <TextSkeleton width={120} height={50} />
                     : (
-                      <TouchableOpacity style={styles.editButton} onPress={() => navigate('Edit Profile')}>
-                        <Text style={styles.editText}>Edit Profile</Text>
+                      <TouchableOpacity style={styles.editButton} onPress={() => navigate('Dashboard')}>
+                        <Text style={styles.editText}>Dashboard</Text>
                       </TouchableOpacity>
-                    )} */}
+                    )}
                 </View>
                 <View>
-                  <StatsSection />
+                  <StatsSection userDetailsData={userDetailsData}/>
                 </View>
                 <View>
                   <BadgeSection />
@@ -231,7 +230,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
   editText: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#6674CC',
     textAlign: 'center',
     fontWeight: 'bold',

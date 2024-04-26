@@ -8,7 +8,7 @@ const useForgetPassword = () => {
     const forgetPassword = async (email) => {
         setIsLoading(true)
         try {
-            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/forgetpassword?email=${email}`, {
+            const response = await fetch(`https://ace-aptitude-new.onrender.com/api/forgetpassword?email=${email}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

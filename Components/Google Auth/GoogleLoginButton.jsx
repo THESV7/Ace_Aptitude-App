@@ -6,7 +6,7 @@ const GoogleLoginButton = () => {
     const handleGoogleLogin = async () => {
         // Define your Google OAuth details
         const clientId = '919740930128-rska2qtp8ds6a0gsnrblqn8bgplo8jrb.apps.googleusercontent.com';
-        const redirectUri = 'https://ace-aptitude-v1.onrender.com/api/googlecallback';
+        const redirectUri = 'https://ace-aptitude-new.onrender.com/api/googlecallback';
 
         // Construct the URL for Google OAuth
         const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=email%20profile`;

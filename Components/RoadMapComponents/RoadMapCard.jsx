@@ -18,7 +18,7 @@ const RoadMapCard = ({ roadmapData,setModelToogle ,setModelData}) => {
     };
 
     const trimmedDescription = trimDescription(roadmapData.description, 100);
-
+    
     return (
         <View style={styles.card}>
             <View style={styles.cardContent}>

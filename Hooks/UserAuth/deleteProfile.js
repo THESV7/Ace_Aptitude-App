@@ -3,7 +3,7 @@ const useDeleteProfile = ()=>{
 
     const deleteProfile = async(id)=>{
         try {
-            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/delete-profile-cloudnary/${id}`,{
+            const response = await fetch(`https://ace-aptitude-new.onrender.com/api/delete-profile-cloudnary/${id}`,{
                 method: 'DELETE'
             })
             const data = await response.json()

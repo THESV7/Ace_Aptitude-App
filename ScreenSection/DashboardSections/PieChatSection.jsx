@@ -2,83 +2,60 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { PieChart } from 'react-native-gifted-charts';
 
-const PieChartSection = () => {
+const colorPalette = [
+    '#87CEFA', // Light Blue
+    '#f89f93', // Light orange
+    '#90EE90', // Light Green
+    '#FFB6C1', // Light Pink
+  ];
 
-    const [innerText, setInnerText] = useState(
-        {
-            label:'Excellent',
-            performance:'47'
-        }
-    )
-    const pieData = [
-        { value: 30, color: '#7b78fc', gradientCenterColor: '#7F7F7F', label:'Excellent' },
-        { value: 90, color: '#4285fa', gradientCenterColor: '#7F7F7F', label:'Okay' },
-        { value: 10, color: '#43536b', gradientCenterColor: '#7F7F7F', label:'Good' },
-        { value: 65, color: '#f89f93', gradientCenterColor: '#7F7F7F', label:'Poor' }
-        // Add more sections with appropriate values and colors
-    ];
+const PieChartSection = ({ piChartData = [] }) => {
+    // Default text when pie chart initializes
+    const [innerText, setInnerText] = useState({
+        label: piChartData[0]?.label,
+        performance: piChartData[0]?.value, // Initial percentage displayed
+    });
 
+    // Ensure piChartData is a proper array
+    const pieData = Array.isArray(piChartData)
+        ? piChartData.map((data, index) => ({
+            ...data,
+            color: colorPalette[index % colorPalette.length], // Assign a color from the palette
+        }))
+        : [];
 
-    const renderDot = color => {
-        return (
-            <View
-                style={{
-                    height: 10,
-                    width: 10,
-                    borderRadius: 5,
-                    backgroundColor: color,
-                    marginRight: 10,
-                }}
-            />
-        );
-    };
+    const renderDot = (color) => (
+        <View
+            style={{
+                height: 10,
+                width: 10,
+                borderRadius: 5,
+                backgroundColor: color,
+                marginRight: 10,
+            }}
+        />
+    );
 
-    const renderLegendComponent = () => {
-        return (
-            <>
+    const renderLegendComponent = () => (
+        <View>
+            {pieData.map((item, index) => (
                 <View
+                    key={index}
                     style={{
                         flexDirection: 'row',
-                        justifyContent: 'center',
-                        marginVertical: 10,
-                        alignItems: 'center'
-                    }}>
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            width: 120,
-                            marginRight: 20,
-                        }}>
-                        {renderDot('#006DFF')}
-                        <Text style={{ fontSize: 16, fontWeight: '700' }}>Excellent: 47%</Text>
-                    </View>
-                    <View
-                        style={{ flexDirection: 'row', alignItems: 'center', width: 120 }}>
-                        {renderDot('#8F80F3')}
-                        <Text style={{ fontSize: 16, fontWeight: '700' }}>Okay: 16%</Text>
-                    </View>
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        marginBottom: 10,
+                    }}
+                >
+                    {renderDot(item.color)}
+                    <Text style={{ fontSize: 16, fontWeight: '700' }}>
+                        {item.label}: {item.value}
+                    </Text>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            width: 120,
-                            marginRight: 20,
-                        }}>
-                        {renderDot('#3BE9DE')}
-                        <Text style={{ fontSize: 16, fontWeight: '700' }}>Good: 40%</Text>
-                    </View>
-                    <View
-                        style={{ flexDirection: 'row', alignItems: 'center', width: 120 }}>
-                        {renderDot('#FF7F97')}
-                        <Text style={{ fontSize: 16, fontWeight: '700' }}>Poor: 3%</Text>
-                    </View>
-                </View>
-            </>
-        );
-    };
+            ))}
+        </View>
+    );
 
     return (
         <View style={{ backgroundColor: '#fff', borderRadius: 7, padding: 20, elevation: 2 }}>
@@ -92,11 +69,17 @@ const PieChartSection = () => {
                     radius={90}
                     innerRadius={60}
                     innerCircleColor={'#232B5D'}
-                    onPress={(e)=> {setInnerText({label:e.label , performance:e.value})}}
+                    onPress={(e) => {
+                        setInnerText({ label: e.label, performance: e.value });
+                    }}
                     centerLabelComponent={() => (
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 22, color: 'white', fontWeight: 'bold' }}>{innerText.performance}%</Text>
-                            <Text style={{ fontSize: 14, color: 'white' }}>{innerText.label}</Text>
+                            <Text style={{ fontSize: 22, color: 'white', fontWeight: 'bold' }}>
+                                {innerText.performance}
+                            </Text>
+                            <Text style={{ fontSize: 14, color: 'white' }}>
+                                {innerText.label}
+                            </Text>
                         </View>
                     )}
                 />

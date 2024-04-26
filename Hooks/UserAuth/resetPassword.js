@@ -10,7 +10,7 @@ const useResetPassword = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/reset-password`, {
+      const response = await fetch(`https://ace-aptitude-new.onrender.com/api/reset-password`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

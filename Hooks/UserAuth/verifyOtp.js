@@ -10,7 +10,7 @@ const useVerifyOtp = () => {
     setError(null);
     setSuccess(false);
     try {
-      const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/verify-otp`, {
+      const response = await fetch(`https://ace-aptitude-new.onrender.com/api/verify-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; // Importing the icon
 
-const RoadMapDetailModal = ({ visibility, OnClose, modelData }) => {
+const RoadMapDetailModal = ({ visibility, OnClose, modelData ,setVisibilty}) => {
     const { exam, description, subjects, resources } = modelData;
     const [expandedSubjects, setExpandedSubjects] = useState([]);
 
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     modalContent: {
         backgroundColor: '#fff',
         padding: 20,
-        borderRadius: 20,
         elevation: 5,
         flex: 1, // Ensure the modal content takes the full height
     },
@@ -118,7 +117,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 5,
         fontSize: 16, // Adjusted font size
-        color: '#fff',
     },
     subjectNameExpanded: {
         fontSize: 18, // Increased font size when expanded

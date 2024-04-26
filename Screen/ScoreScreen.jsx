@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, BackHandler, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { CommonActions, useNavigation, useRoute } from '@react-navigation/native';
 import Animated, {
   useSharedValue,
   withSpring,
@@ -21,6 +21,49 @@ const ScoreScreen = () => {
   const opacity = useSharedValue(0);
   const scale = useSharedValue(0.5);
 
+
+  useEffect(() => {
+    // Override the back button behavior
+    const backAction = () => {
+      Alert.alert(
+        'Please click on Practice ',
+        'if you press on OK the test results will not be stored for analysis',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {
+            text: 'OK',
+            onPress: () => {
+              // BackHandler.exitApp()
+              navigation.dispatch(
+                CommonActions.reset({
+                  index: 0,
+                  routes: [
+                    { name: 'Home' }, // Replace with the appropriate route name
+                  ],
+                })
+              );
+            }, // Exit the app
+          },
+        ],
+        { cancelable: false } // Prevents dismissal by tapping outside the alert
+      );
+      return true; // Prevents default back button behavior
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction
+    );
+
+    return () => {
+      // Clean up the back button listener on component unmount
+      backHandler.remove();
+    };
+  }, []);
   // Animated styles
   const animatedImageStyle = useAnimatedStyle(() => {
     return {
