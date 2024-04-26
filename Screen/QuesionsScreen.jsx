@@ -51,7 +51,7 @@ const QuesionsScreen = () => {
                                 CommonActions.reset({
                                     index: 0,
                                     routes: [
-                                        { name: 'Home' }, // Replace with the appropriate route name
+                                        { name: 'Tabs' }, // Replace with the appropriate route name
                                     ],
                                 })
                             );
